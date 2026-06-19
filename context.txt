@@ -80,5 +80,12 @@ CURRENT_TIMESTAMP)
 - Keywords: CRISPR, synthetic biology, gene synthesis, pathogen, biosecurity, AI model, bioinformatics, genome editing, viral vector, laboratory safety, dual-use, biological weapon, gain-of-function
 - Test result: PASS
 - Notes: 1-second rate limit delay. Handles network timeouts.
+## PROMPT 5 — COMPLETED: Threat Evaluator
+- File: modules/intelstream/evaluator.py
+- What it does: Classifies articles for AI-biosecurity threats using Gemini Flash
+- Class: ThreatEvaluator with methods: evaluate(), batch_evaluate(), get_threat_summary()
+- Output schema: threat_detected, confidence_score, risk_category, justification, entities_mentioned, severity
+- Test result: PASS
+- Notes: Uses response_schema for strict JSON. Caches results in SQLite.
 ## NEXT TASK
-- Prompt 5: Build modules/intelstream/evaluator.py (threat classifier with structured JSON)
+- Prompt 6: Build modules/intelstream/brief_generator.py (HTML weekly brief)
