@@ -275,12 +275,12 @@ git clone https://github.com/DeveloperKush/AIS-Sentinel-Asia-AI-Safety-Monitorin
 cd AIS-Sentinel-Asia-AI-Safety-Monitoring-Control-Platform
 
 # 2. Create & activate virtual environment
-python -m venv venv
+python -m venv .venv
 
 # Windows:
-.\venv\Scripts\activate
+.\.venv\Scripts\activate
 # macOS/Linux:
-source venv/bin/activate
+source .venv/bin/activate
 
 # 3. Install dependencies
 pip install -r requirements.txt
