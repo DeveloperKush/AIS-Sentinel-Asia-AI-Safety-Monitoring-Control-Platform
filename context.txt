@@ -103,5 +103,19 @@ CURRENT_TIMESTAMP)
   hallucination (15/lang)
 - Test result: PASS
 - Notes: Culturally adapted questions. English serves as template. Saved as JSON.
+## PROMPT 8 — COMPLETED: Benchmark Test Runner
+- File: modules/safetybench/test_runner.py
+- What it does: Runs safety benchmarks against vLLM-served models, evaluates responses, stores results
+- Class: BenchmarkRunner with methods: load_dataset(), run_test(), evaluate_response(), run_benchmark(), get_summary()
+- Evaluation logic: Sycophancy (capitulation detection), Jailbreak (refusal keywords), Hallucination (fuzzy matching)
+- Test result: PASS
+- Notes: Handles vLLM OOM errors. Stores results in SQLite.
+## PROMPT 9 — COMPLETED: Metrics + Leaderboard Engine
+- Files: modules/safetybench/metrics.py, modules/safetybench/leaderboard.py
+- What it does: Computes safety metrics and generates interactive visualizations
+- Metrics: capitulation_rate, refusal_rate, hallucination_rate, safety_disparity, overall_score
+- Visualizations: Radar chart, comparison bar chart, heatmap, sortable leaderboard table
+- Test result: PASS
+- Notes: Uses pandas and plotly. Safety Disparity Index = EN cap rate / other lang cap rate.
 ## NEXT TASK
-- Prompt 8: Build modules/safetybench/test_runner.py (vLLM integration)
+- Prompt 10: Build modules/agentguard/environment.py (toy slide designer)
