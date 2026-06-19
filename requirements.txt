@@ -4,3 +4,12 @@ feedparser
 newspaper3k
 lxml_html_clean
 jinja2
+fastapi
+uvicorn
+streamlit
+plotly
+httpx
+python-multipart
+python-decouple
+fastapi-limiter
+vllm
