@@ -58,3 +58,12 @@ CURRENT_TIMESTAMP)
 - Notes: DB_PATH = "ais_sentinel.db", uses context managers, returns inserted row IDs
 ## NEXT TASK
 - Prompt 2: Build core/llm_client.py (Gemini Flash API wrapper)
+## PROMPT 2 — COMPLETED: Unified LLM Client
+- File: core/llm_client.py
+- What it does: Wraps Gemini Flash API with retry logic, structured JSON output, translation
+- Class: GeminiClient with methods: generate(), generate_structured(), translate(), count_tokens()
+- Config: model_name="gemini-1.5-flash", temperature=0.3, 3 retries with exponential backoff
+- Test result: PASS
+- Notes: Requires GEMINI_API_KEY env var. Uses google-generativeai library.
+## NEXT TASK
+- Prompt 3: Build core/translator.py (smart translation with keyword extraction)
