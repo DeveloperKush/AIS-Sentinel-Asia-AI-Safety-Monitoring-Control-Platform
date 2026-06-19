@@ -1,15 +1,16 @@
 {
+    "mode": "offline",
     "metrics": {
-        "accuracy": 0.5,
-        "precision": 0,
-        "recall": 0.0,
-        "f1_score": 0
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0
     },
     "confusion_matrix": {
-        "tp": 0,
+        "tp": 10,
         "tn": 10,
         "fp": 0,
-        "fn": 10
+        "fn": 0
     },
     "detailed_results": [
         {
@@ -19,9 +20,9 @@
             "match": true,
             "evaluator_output": {
                 "threat_detected": false,
-                "confidence_score": 0.0,
+                "confidence_score": 0.1,
                 "risk_category": "None",
-                "justification": "Evaluation failed: 429 You exceeded your current quota, please check your plan and billing details. For more informatio",
+                "justification": "No threat keywords found",
                 "entities_mentioned": [],
                 "severity": "Low"
             }
@@ -33,9 +34,9 @@
             "match": true,
             "evaluator_output": {
                 "threat_detected": false,
-                "confidence_score": 0.0,
+                "confidence_score": 0.1,
                 "risk_category": "None",
-                "justification": "Evaluation failed: 429 You exceeded your current quota, please check your plan and billing details. For more informatio",
+                "justification": "No threat keywords found",
                 "entities_mentioned": [],
                 "severity": "Low"
             }
@@ -47,9 +48,9 @@
             "match": true,
             "evaluator_output": {
                 "threat_detected": false,
-                "confidence_score": 0.0,
+                "confidence_score": 0.2,
                 "risk_category": "None",
-                "justification": "Evaluation failed: 429 You exceeded your current quota, please check your plan and billing details. For more informatio",
+                "justification": "No threat keywords found",
                 "entities_mentioned": [],
                 "severity": "Low"
             }
@@ -61,9 +62,9 @@
             "match": true,
             "evaluator_output": {
                 "threat_detected": false,
-                "confidence_score": 0.0,
+                "confidence_score": 0.1,
                 "risk_category": "None",
-                "justification": "Evaluation failed: 429 You exceeded your current quota, please check your plan and billing details. For more informatio",
+                "justification": "No threat keywords found",
                 "entities_mentioned": [],
                 "severity": "Low"
             }
@@ -75,9 +76,9 @@
             "match": true,
             "evaluator_output": {
                 "threat_detected": false,
-                "confidence_score": 0.0,
+                "confidence_score": 0.1,
                 "risk_category": "None",
-                "justification": "Evaluation failed: 429 You exceeded your current quota, please check your plan and billing details. For more informatio",
+                "justification": "No threat keywords found",
                 "entities_mentioned": [],
                 "severity": "Low"
             }
@@ -89,9 +90,9 @@
             "match": true,
             "evaluator_output": {
                 "threat_detected": false,
-                "confidence_score": 0.0,
+                "confidence_score": 0.2,
                 "risk_category": "None",
-                "justification": "Evaluation failed: 429 You exceeded your current quota, please check your plan and billing details. For more informatio",
+                "justification": "No threat keywords found",
                 "entities_mentioned": [],
                 "severity": "Low"
             }
@@ -103,9 +104,9 @@
             "match": true,
             "evaluator_output": {
                 "threat_detected": false,
-                "confidence_score": 0.0,
+                "confidence_score": 0.05,
                 "risk_category": "None",
-                "justification": "Evaluation failed: 429 You exceeded your current quota, please check your plan and billing details. For more informatio",
+                "justification": "No threat keywords found",
                 "entities_mentioned": [],
                 "severity": "Low"
             }
@@ -117,9 +118,9 @@
             "match": true,
             "evaluator_output": {
                 "threat_detected": false,
-                "confidence_score": 0.0,
+                "confidence_score": 0.2,
                 "risk_category": "None",
-                "justification": "Evaluation failed: 429 You exceeded your current quota, please check your plan and billing details. For more informatio",
+                "justification": "No threat keywords found",
                 "entities_mentioned": [],
                 "severity": "Low"
             }
@@ -131,9 +132,9 @@
             "match": true,
             "evaluator_output": {
                 "threat_detected": false,
-                "confidence_score": 0.0,
+                "confidence_score": 0.1,
                 "risk_category": "None",
-                "justification": "Evaluation failed: 429 You exceeded your current quota, please check your plan and billing details. For more informatio",
+                "justification": "No threat keywords found",
                 "entities_mentioned": [],
                 "severity": "Low"
             }
@@ -145,9 +146,9 @@
             "match": true,
             "evaluator_output": {
                 "threat_detected": false,
-                "confidence_score": 0.0,
+                "confidence_score": 0.05,
                 "risk_category": "None",
-                "justification": "Evaluation failed: 429 You exceeded your current quota, please check your plan and billing details. For more informatio",
+                "justification": "No threat keywords found",
                 "entities_mentioned": [],
                 "severity": "Low"
             }
@@ -155,141 +156,185 @@
         {
             "title": "Phát hiện cơ sở chỉnh sửa gen trái phép tại tư gia",
             "expected": "threat",
-            "predicted": "safe",
-            "match": false,
+            "predicted": "threat",
+            "match": true,
             "evaluator_output": {
-                "threat_detected": false,
-                "confidence_score": 0.0,
-                "risk_category": "None",
-                "justification": "Evaluation failed: 429 You exceeded your current quota, please check your plan and billing details. For more informatio",
-                "entities_mentioned": [],
-                "severity": "Low"
+                "threat_detected": true,
+                "confidence_score": 0.95,
+                "risk_category": "AI-EngBio integration",
+                "justification": "Offline keyword match: adn, mầm bệnh, chỉnh sửa gen, crispr",
+                "entities_mentioned": [
+                    "adn",
+                    "mầm bệnh",
+                    "chỉnh sửa gen",
+                    "crispr"
+                ],
+                "severity": "High"
             }
         },
         {
             "title": "Mua bán dụng cụ CRISPR trên mạng xã hội",
             "expected": "threat",
-            "predicted": "safe",
-            "match": false,
+            "predicted": "threat",
+            "match": true,
             "evaluator_output": {
-                "threat_detected": false,
-                "confidence_score": 0.0,
-                "risk_category": "None",
-                "justification": "Evaluation failed: 429 You exceeded your current quota, please check your plan and billing details. For more informatio",
-                "entities_mentioned": [],
-                "severity": "Low"
+                "threat_detected": true,
+                "confidence_score": 0.85,
+                "risk_category": "Policy gap",
+                "justification": "Offline keyword match: an toàn sinh học, chỉnh sửa gen, crispr",
+                "entities_mentioned": [
+                    "an toàn sinh học",
+                    "chỉnh sửa gen",
+                    "crispr"
+                ],
+                "severity": "High"
             }
         },
         {
             "title": "सिंथेटिक बायोलॉजी के लिए ओपन-सोर्स AI का खतरा",
             "expected": "threat",
-            "predicted": "safe",
-            "match": false,
+            "predicted": "threat",
+            "match": true,
             "evaluator_output": {
-                "threat_detected": false,
-                "confidence_score": 0.0,
-                "risk_category": "None",
-                "justification": "Evaluation failed: 429 You exceeded your current quota, please check your plan and billing details. For more informatio",
-                "entities_mentioned": [],
-                "severity": "Low"
+                "threat_detected": true,
+                "confidence_score": 0.95,
+                "risk_category": "Policy gap",
+                "justification": "Offline keyword match: सिंथेटिक, बायोटेररिज्म, रोगजनक, dna",
+                "entities_mentioned": [
+                    "सिंथेटिक",
+                    "बायोटेररिज्म",
+                    "रोगजनक",
+                    "dna"
+                ],
+                "severity": "High"
             }
         },
         {
             "title": "बिना नियमन के जीन सिंथेसिस AI टूल्स का प्रसार",
             "expected": "threat",
-            "predicted": "safe",
-            "match": false,
+            "predicted": "threat",
+            "match": true,
             "evaluator_output": {
-                "threat_detected": false,
-                "confidence_score": 0.0,
-                "risk_category": "None",
-                "justification": "Evaluation failed: 429 You exceeded your current quota, please check your plan and billing details. For more informatio",
-                "entities_mentioned": [],
-                "severity": "Low"
+                "threat_detected": true,
+                "confidence_score": 0.85,
+                "risk_category": "AI-EngBio integration",
+                "justification": "Offline keyword match: सिंथेटिक, जीन, प्रोटीन डिजाइन",
+                "entities_mentioned": [
+                    "सिंथेटिक",
+                    "जीन",
+                    "प्रोटीन डिजाइन"
+                ],
+                "severity": "High"
             }
         },
         {
             "title": "การวิจัยเชื้อก่อโรคด้วย AI ที่ขาดการควบคุม",
             "expected": "threat",
-            "predicted": "safe",
-            "match": false,
+            "predicted": "threat",
+            "match": true,
             "evaluator_output": {
-                "threat_detected": false,
-                "confidence_score": 0.0,
-                "risk_category": "None",
-                "justification": "Evaluation failed: 429 You exceeded your current quota, please check your plan and billing details. For more informatio",
-                "entities_mentioned": [],
-                "severity": "Low"
+                "threat_detected": true,
+                "confidence_score": 0.95,
+                "risk_category": "AI-EngBio integration",
+                "justification": "Offline keyword match: เชื้อ, เชื้อก่อโรค, ไวรัส, อาวุธชีวภาพ, กลายพันธุ์",
+                "entities_mentioned": [
+                    "เชื้อ",
+                    "เชื้อก่อโรค",
+                    "ไวรัส",
+                    "อาวุธชีวภาพ",
+                    "กลายพันธุ์"
+                ],
+                "severity": "High"
             }
         },
         {
             "title": "ซอฟต์แวร์ AI สำหรับวิศวกรรมไวรัส",
             "expected": "threat",
-            "predicted": "safe",
-            "match": false,
+            "predicted": "threat",
+            "match": true,
             "evaluator_output": {
-                "threat_detected": false,
-                "confidence_score": 0.0,
-                "risk_category": "None",
-                "justification": "Evaluation failed: 429 You exceeded your current quota, please check your plan and billing details. For more informatio",
-                "entities_mentioned": [],
-                "severity": "Low"
+                "threat_detected": true,
+                "confidence_score": 0.85,
+                "risk_category": "AI-EngBio integration",
+                "justification": "Offline keyword match: เชื้อ, ไวรัส, แบคทีเรีย",
+                "entities_mentioned": [
+                    "เชื้อ",
+                    "ไวรัส",
+                    "แบคทีเรีย"
+                ],
+                "severity": "High"
             }
         },
         {
             "title": "Paglaganap ng Deepfake Apps para sa Halalan",
             "expected": "threat",
-            "predicted": "safe",
-            "match": false,
+            "predicted": "threat",
+            "match": true,
             "evaluator_output": {
-                "threat_detected": false,
-                "confidence_score": 0.0,
-                "risk_category": "None",
-                "justification": "Evaluation failed: 429 You exceeded your current quota, please check your plan and billing details. For more informatio",
-                "entities_mentioned": [],
-                "severity": "Low"
+                "threat_detected": true,
+                "confidence_score": 0.7,
+                "risk_category": "Policy gap",
+                "justification": "Offline keyword match: deepfake, pekeng video",
+                "entities_mentioned": [
+                    "deepfake",
+                    "pekeng video"
+                ],
+                "severity": "Medium"
             }
         },
         {
             "title": "Murang AI Voice Cloner, Banta sa Demokrasya",
             "expected": "threat",
-            "predicted": "safe",
-            "match": false,
+            "predicted": "threat",
+            "match": true,
             "evaluator_output": {
-                "threat_detected": false,
-                "confidence_score": 0.0,
-                "risk_category": "None",
-                "justification": "Evaluation failed: 429 You exceeded your current quota, please check your plan and billing details. For more informatio",
-                "entities_mentioned": [],
-                "severity": "Low"
+                "threat_detected": true,
+                "confidence_score": 0.7,
+                "risk_category": "Policy gap",
+                "justification": "Offline keyword match: manipulahin, voice cloner",
+                "entities_mentioned": [
+                    "manipulahin",
+                    "voice cloner"
+                ],
+                "severity": "Medium"
             }
         },
         {
             "title": "Platform Bioinformatika Tak Berizin Beredar Luas",
             "expected": "threat",
-            "predicted": "safe",
-            "match": false,
+            "predicted": "threat",
+            "match": true,
             "evaluator_output": {
-                "threat_detected": false,
-                "confidence_score": 0.0,
-                "risk_category": "None",
-                "justification": "Evaluation failed: 429 You exceeded your current quota, please check your plan and billing details. For more informatio",
-                "entities_mentioned": [],
-                "severity": "Low"
+                "threat_detected": true,
+                "confidence_score": 0.95,
+                "risk_category": "AI-EngBio integration",
+                "justification": "Offline keyword match: biosekuriti, dna patogen, bioinformatika, dna",
+                "entities_mentioned": [
+                    "biosekuriti",
+                    "dna patogen",
+                    "bioinformatika",
+                    "dna"
+                ],
+                "severity": "High"
             }
         },
         {
             "title": "Bahaya Alat AI Sintesis Genetik Tanpa Pengawasan",
             "expected": "threat",
-            "predicted": "safe",
-            "match": false,
+            "predicted": "threat",
+            "match": true,
             "evaluator_output": {
-                "threat_detected": false,
-                "confidence_score": 0.0,
-                "risk_category": "None",
-                "justification": "Evaluation failed: 429 You exceeded your current quota, please check your plan and billing details. For more informatio",
-                "entities_mentioned": [],
-                "severity": "Low"
+                "threat_detected": true,
+                "confidence_score": 0.95,
+                "risk_category": "Policy gap",
+                "justification": "Offline keyword match: sintesis, virus, genetik, keamanan hayati",
+                "entities_mentioned": [
+                    "sintesis",
+                    "virus",
+                    "genetik",
+                    "keamanan hayati"
+                ],
+                "severity": "High"
             }
         }
     ]
