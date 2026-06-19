@@ -1,2 +1,5 @@
 google-generativeai
 python-dotenv
+feedparser
+newspaper3k
+lxml_html_clean
