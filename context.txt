@@ -1,0 +1,60 @@
+# AIS-Sentinel — Build Context Log
+# Updated: 2026-06-19 [HH:MM]
+# Last Prompt: #0 — Setup
+
+## PROJECT OVERVIEW
+- Name: AIS-Sentinel
+- Track: Global South AIS Challenge 2026 — Track 3 (Technical Safety)
+- Architecture: 4 modules (IntelStream, SafetyBench, AgentGuard, PolicyBridge) + Core + Frontend
+- Stack: Python 3.11, FastAPI, Streamlit, SQLite, Gemini Flash API, vLLM, Plotly
+- GitHub: https://github.com/DeveloperKush/AIS-Sentinel-Asia-AI-Safety-Monitoring-Control-Platform
+
+## COMPLETED MODULES
+- [ ] Core Infrastructure
+- [ ] IntelStream
+- [ ] SafetyBench
+- [ ] AgentGuard
+- [ ] PolicyBridge
+- [ ] Frontend
+- [ ] Testing
+- [ ] Pitch
+
+## COMPLETED FILES
+# None yet — this is the starting point
+
+## DATABASE SCHEMA
+# Not yet built — Prompt 1 will create this
+
+## API CONTRACTS
+# Not yet built
+
+## KEY DECISIONS
+# Record architectural decisions here
+
+## KNOWN ISSUES
+# None yet
+
+## PROMPT 1 — COMPLETED: SQLite Database Schema
+- File: core/database.py
+- What it does: 3 tables (articles, benchmark_results, agent_logs), insert/get helpers
+- Schema:
+
+CREATE TABLE articles (id INTEGER PRIMARY KEY, title TEXT, source_url TEXT, source_country TEXT,
+language TEXT, original_text TEXT, translated_text TEXT, threat_detected BOOLEAN, confidence_score
+REAL, risk_category TEXT, justification TEXT, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP)
+
+
+CREATE TABLE benchmark_results (id INTEGER PRIMARY KEY, model_name TEXT, language TEXT, test_type
+TEXT, prompt TEXT, model_response TEXT, passed BOOLEAN, created_at TIMESTAMP DEFAULT
+CURRENT_TIMESTAMP)
+
+
+CREATE TABLE agent_logs (id INTEGER PRIMARY KEY, task_description TEXT, attack_type TEXT, slide_json
+TEXT, monitor_suspicion_score REAL, detected BOOLEAN, created_at TIMESTAMP DEFAULT
+CURRENT_TIMESTAMP)
+
+
+- Test result: PASS
+- Notes: DB_PATH = "ais_sentinel.db", uses context managers, returns inserted row IDs
+## NEXT TASK
+- Prompt 2: Build core/llm_client.py (Gemini Flash API wrapper)
