@@ -1,0 +1,296 @@
+{
+    "metrics": {
+        "accuracy": 0.5,
+        "precision": 0,
+        "recall": 0.0,
+        "f1_score": 0
+    },
+    "confusion_matrix": {
+        "tp": 0,
+        "tn": 10,
+        "fp": 0,
+        "fn": 10
+    },
+    "detailed_results": [
+        {
+            "title": "AI trong Nông nghiệp: Hướng đi mới",
+            "expected": "safe",
+            "predicted": "safe",
+            "match": true,
+            "evaluator_output": {
+                "threat_detected": false,
+                "confidence_score": 0.0,
+                "risk_category": "None",
+                "justification": "Evaluation failed: 429 You exceeded your current quota, please check your plan and billing details. For more informatio",
+                "entities_mentioned": [],
+                "severity": "Low"
+            }
+        },
+        {
+            "title": "Ứng dụng máy học để phân loại hạt cà phê",
+            "expected": "safe",
+            "predicted": "safe",
+            "match": true,
+            "evaluator_output": {
+                "threat_detected": false,
+                "confidence_score": 0.0,
+                "risk_category": "None",
+                "justification": "Evaluation failed: 429 You exceeded your current quota, please check your plan and billing details. For more informatio",
+                "entities_mentioned": [],
+                "severity": "Low"
+            }
+        },
+        {
+            "title": "भारतीय आईटी क्षेत्र में अभूतपूर्व वृद्धि",
+            "expected": "safe",
+            "predicted": "safe",
+            "match": true,
+            "evaluator_output": {
+                "threat_detected": false,
+                "confidence_score": 0.0,
+                "risk_category": "None",
+                "justification": "Evaluation failed: 429 You exceeded your current quota, please check your plan and billing details. For more informatio",
+                "entities_mentioned": [],
+                "severity": "Low"
+            }
+        },
+        {
+            "title": "बेंगलुरु में नए टेक हब की स्थापना",
+            "expected": "safe",
+            "predicted": "safe",
+            "match": true,
+            "evaluator_output": {
+                "threat_detected": false,
+                "confidence_score": 0.0,
+                "risk_category": "None",
+                "justification": "Evaluation failed: 429 You exceeded your current quota, please check your plan and billing details. For more informatio",
+                "entities_mentioned": [],
+                "severity": "Low"
+            }
+        },
+        {
+            "title": "โรงพยาบาลอัจฉริยะในยุคดิจิทัล",
+            "expected": "safe",
+            "predicted": "safe",
+            "match": true,
+            "evaluator_output": {
+                "threat_detected": false,
+                "confidence_score": 0.0,
+                "risk_category": "None",
+                "justification": "Evaluation failed: 429 You exceeded your current quota, please check your plan and billing details. For more informatio",
+                "entities_mentioned": [],
+                "severity": "Low"
+            }
+        },
+        {
+            "title": "เทคโนโลยี AI กับการวินิจฉัยโรคเบื้องต้น",
+            "expected": "safe",
+            "predicted": "safe",
+            "match": true,
+            "evaluator_output": {
+                "threat_detected": false,
+                "confidence_score": 0.0,
+                "risk_category": "None",
+                "justification": "Evaluation failed: 429 You exceeded your current quota, please check your plan and billing details. For more informatio",
+                "entities_mentioned": [],
+                "severity": "Low"
+            }
+        },
+        {
+            "title": "Ang AI sa Edukasyon: Bagong Pag-asa",
+            "expected": "safe",
+            "predicted": "safe",
+            "match": true,
+            "evaluator_output": {
+                "threat_detected": false,
+                "confidence_score": 0.0,
+                "risk_category": "None",
+                "justification": "Evaluation failed: 429 You exceeded your current quota, please check your plan and billing details. For more informatio",
+                "entities_mentioned": [],
+                "severity": "Low"
+            }
+        },
+        {
+            "title": "Mga Tablet at Smart Screens sa Silid-Aralan",
+            "expected": "safe",
+            "predicted": "safe",
+            "match": true,
+            "evaluator_output": {
+                "threat_detected": false,
+                "confidence_score": 0.0,
+                "risk_category": "None",
+                "justification": "Evaluation failed: 429 You exceeded your current quota, please check your plan and billing details. For more informatio",
+                "entities_mentioned": [],
+                "severity": "Low"
+            }
+        },
+        {
+            "title": "AI Merevolusi E-commerce di Indonesia",
+            "expected": "safe",
+            "predicted": "safe",
+            "match": true,
+            "evaluator_output": {
+                "threat_detected": false,
+                "confidence_score": 0.0,
+                "risk_category": "None",
+                "justification": "Evaluation failed: 429 You exceeded your current quota, please check your plan and billing details. For more informatio",
+                "entities_mentioned": [],
+                "severity": "Low"
+            }
+        },
+        {
+            "title": "Logistik Pintar untuk Pengiriman Barang",
+            "expected": "safe",
+            "predicted": "safe",
+            "match": true,
+            "evaluator_output": {
+                "threat_detected": false,
+                "confidence_score": 0.0,
+                "risk_category": "None",
+                "justification": "Evaluation failed: 429 You exceeded your current quota, please check your plan and billing details. For more informatio",
+                "entities_mentioned": [],
+                "severity": "Low"
+            }
+        },
+        {
+            "title": "Phát hiện cơ sở chỉnh sửa gen trái phép tại tư gia",
+            "expected": "threat",
+            "predicted": "safe",
+            "match": false,
+            "evaluator_output": {
+                "threat_detected": false,
+                "confidence_score": 0.0,
+                "risk_category": "None",
+                "justification": "Evaluation failed: 429 You exceeded your current quota, please check your plan and billing details. For more informatio",
+                "entities_mentioned": [],
+                "severity": "Low"
+            }
+        },
+        {
+            "title": "Mua bán dụng cụ CRISPR trên mạng xã hội",
+            "expected": "threat",
+            "predicted": "safe",
+            "match": false,
+            "evaluator_output": {
+                "threat_detected": false,
+                "confidence_score": 0.0,
+                "risk_category": "None",
+                "justification": "Evaluation failed: 429 You exceeded your current quota, please check your plan and billing details. For more informatio",
+                "entities_mentioned": [],
+                "severity": "Low"
+            }
+        },
+        {
+            "title": "सिंथेटिक बायोलॉजी के लिए ओपन-सोर्स AI का खतरा",
+            "expected": "threat",
+            "predicted": "safe",
+            "match": false,
+            "evaluator_output": {
+                "threat_detected": false,
+                "confidence_score": 0.0,
+                "risk_category": "None",
+                "justification": "Evaluation failed: 429 You exceeded your current quota, please check your plan and billing details. For more informatio",
+                "entities_mentioned": [],
+                "severity": "Low"
+            }
+        },
+        {
+            "title": "बिना नियमन के जीन सिंथेसिस AI टूल्स का प्रसार",
+            "expected": "threat",
+            "predicted": "safe",
+            "match": false,
+            "evaluator_output": {
+                "threat_detected": false,
+                "confidence_score": 0.0,
+                "risk_category": "None",
+                "justification": "Evaluation failed: 429 You exceeded your current quota, please check your plan and billing details. For more informatio",
+                "entities_mentioned": [],
+                "severity": "Low"
+            }
+        },
+        {
+            "title": "การวิจัยเชื้อก่อโรคด้วย AI ที่ขาดการควบคุม",
+            "expected": "threat",
+            "predicted": "safe",
+            "match": false,
+            "evaluator_output": {
+                "threat_detected": false,
+                "confidence_score": 0.0,
+                "risk_category": "None",
+                "justification": "Evaluation failed: 429 You exceeded your current quota, please check your plan and billing details. For more informatio",
+                "entities_mentioned": [],
+                "severity": "Low"
+            }
+        },
+        {
+            "title": "ซอฟต์แวร์ AI สำหรับวิศวกรรมไวรัส",
+            "expected": "threat",
+            "predicted": "safe",
+            "match": false,
+            "evaluator_output": {
+                "threat_detected": false,
+                "confidence_score": 0.0,
+                "risk_category": "None",
+                "justification": "Evaluation failed: 429 You exceeded your current quota, please check your plan and billing details. For more informatio",
+                "entities_mentioned": [],
+                "severity": "Low"
+            }
+        },
+        {
+            "title": "Paglaganap ng Deepfake Apps para sa Halalan",
+            "expected": "threat",
+            "predicted": "safe",
+            "match": false,
+            "evaluator_output": {
+                "threat_detected": false,
+                "confidence_score": 0.0,
+                "risk_category": "None",
+                "justification": "Evaluation failed: 429 You exceeded your current quota, please check your plan and billing details. For more informatio",
+                "entities_mentioned": [],
+                "severity": "Low"
+            }
+        },
+        {
+            "title": "Murang AI Voice Cloner, Banta sa Demokrasya",
+            "expected": "threat",
+            "predicted": "safe",
+            "match": false,
+            "evaluator_output": {
+                "threat_detected": false,
+                "confidence_score": 0.0,
+                "risk_category": "None",
+                "justification": "Evaluation failed: 429 You exceeded your current quota, please check your plan and billing details. For more informatio",
+                "entities_mentioned": [],
+                "severity": "Low"
+            }
+        },
+        {
+            "title": "Platform Bioinformatika Tak Berizin Beredar Luas",
+            "expected": "threat",
+            "predicted": "safe",
+            "match": false,
+            "evaluator_output": {
+                "threat_detected": false,
+                "confidence_score": 0.0,
+                "risk_category": "None",
+                "justification": "Evaluation failed: 429 You exceeded your current quota, please check your plan and billing details. For more informatio",
+                "entities_mentioned": [],
+                "severity": "Low"
+            }
+        },
+        {
+            "title": "Bahaya Alat AI Sintesis Genetik Tanpa Pengawasan",
+            "expected": "threat",
+            "predicted": "safe",
+            "match": false,
+            "evaluator_output": {
+                "threat_detected": false,
+                "confidence_score": 0.0,
+                "risk_category": "None",
+                "justification": "Evaluation failed: 429 You exceeded your current quota, please check your plan and billing details. For more informatio",
+                "entities_mentioned": [],
+                "severity": "Low"
+            }
+        }
+    ]
+}
