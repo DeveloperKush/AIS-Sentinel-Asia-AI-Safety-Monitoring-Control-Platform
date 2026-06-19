@@ -89,3 +89,12 @@ CURRENT_TIMESTAMP)
 - Notes: Uses response_schema for strict JSON. Caches results in SQLite.
 ## NEXT TASK
 - Prompt 6: Build modules/intelstream/brief_generator.py (HTML weekly brief)
+## PROMPT 6 — COMPLETED: Weekly Brief Generator
+- File: modules/intelstream/brief_generator.py
+- What it does: Generates HTML weekly intelligence brief with inline CSS
+- Class: BriefGenerator with methods: generate_brief(), save_brief()
+- Features: Executive Summary, Regional Trends table, Flagged High-Risk cards, severity color coding
+- Test result: PASS
+- Notes: Uses Jinja2 templating. Inline CSS for portability. Includes sample template fallback.
+## NEXT TASK
+- Prompt 7: Build config/benchmark_prompts.json (multilingual safety dataset)
