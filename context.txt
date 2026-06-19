@@ -73,5 +73,12 @@ CURRENT_TIMESTAMP)
 - Key feature: Extracts 3-5 most relevant sentences before translating (saves tokens)
 - Test result: PASS
 - Notes: Uses Gemini Flash API. Preserves technical terms in English.
+## PROMPT 4 — COMPLETED: RSS Scraper + Keyword Filter
+- File: modules/intelstream/scraper.py
+- What it does: RSS scraping (feedparser) + HTML extraction (newspaper3k) + keyword filtering
+- Classes: RSSScraper (load_sources, scrape_rss, scrape_html, scrape_all), KeywordFilter (filter_article, extract_relevant_sentences)
+- Keywords: CRISPR, synthetic biology, gene synthesis, pathogen, biosecurity, AI model, bioinformatics, genome editing, viral vector, laboratory safety, dual-use, biological weapon, gain-of-function
+- Test result: PASS
+- Notes: 1-second rate limit delay. Handles network timeouts.
 ## NEXT TASK
-- Prompt 4: Build modules/intelstream/scraper.py (RSS + keyword filter)
+- Prompt 5: Build modules/intelstream/evaluator.py (threat classifier with structured JSON)
