@@ -1,0 +1,98 @@
+{
+    "Biosecurity": [
+        {
+            "jurisdiction": "Vietnam",
+            "law_name": "Law 134/2025 (AI Law)",
+            "article": "Article 12",
+            "requirement": "Strict registration and mandatory risk assessment for AI models integrated with biological sequence design tools.",
+            "penalty": "Administrative fine up to 500,000,000 VND and immediate suspension of model deployment.",
+            "effective_date": "2025-06-01"
+        },
+        {
+            "jurisdiction": "EU",
+            "law_name": "EU AI Act",
+            "article": "Article 6",
+            "requirement": "High-risk classification requiring independent third-party safety audits for dual-use biotechnology AI applications.",
+            "penalty": "Administrative fines up to 35,000,000 EUR or 7% of global annual turnover, whichever is higher.",
+            "effective_date": "2026-08-01"
+        },
+        {
+            "jurisdiction": "India",
+            "law_name": "MeitY AI frameworks",
+            "article": "Section 4(c)",
+            "requirement": "Mandatory biosecurity alignment check and threat reporting before publishing open-weight biological design models.",
+            "penalty": "Revocation of digital commercial authorization and administrative sanctions.",
+            "effective_date": "2025-12-01"
+        }
+    ],
+    "AI Safety": [
+        {
+            "jurisdiction": "Vietnam",
+            "law_name": "Decree 142/2026 (Human-in-the-Loop)",
+            "article": "Article 8",
+            "requirement": "Mandatory human-in-the-loop supervisor override mechanism for all generative foundation models deployed in public services.",
+            "penalty": "Fines up to 200,000,000 VND and mandatory public model recall.",
+            "effective_date": "2026-01-01"
+        },
+        {
+            "jurisdiction": "Singapore",
+            "law_name": "AI Verify Framework",
+            "article": "Section 3.2",
+            "requirement": "Mandatory verification of model robustness against jailbreak prompts, sycophancy bias, and translation hallucinations.",
+            "penalty": "Voluntary framework - loss of compliance certification, standard listing, and reputational damage.",
+            "effective_date": "2024-05-01"
+        },
+        {
+            "jurisdiction": "ASEAN",
+            "law_name": "ASEAN AI Governance Guide",
+            "article": "Section 5 (Voluntary)",
+            "requirement": "Implement localized risk monitoring, alignment checks, and translation guardrails to prevent harmful model behaviors in regional languages.",
+            "penalty": "Voluntary guidance - no direct legal penalties, serves as regional industry best practice.",
+            "effective_date": "2024-02-01"
+        },
+        {
+            "jurisdiction": "EU",
+            "law_name": "EU AI Act",
+            "article": "Article 52",
+            "requirement": "Transparency obligation: ensure users know they are interacting with AI, and disclose safety benchmark performance metrics.",
+            "penalty": "Administrative fines up to 15,000,000 EUR or 3% of global annual turnover.",
+            "effective_date": "2026-08-01"
+        }
+    ],
+    "Data Privacy": [
+        {
+            "jurisdiction": "India",
+            "law_name": "Digital Personal Data Protection Act (DPDP)",
+            "article": "Section 6",
+            "requirement": "Obtain explicit consent before utilizing personal data to train large language models or processing individual user interactions.",
+            "penalty": "Administrative fine up to 250 Crore INR (2.5 billion INR).",
+            "effective_date": "2024-09-01"
+        },
+        {
+            "jurisdiction": "Singapore",
+            "law_name": "Personal Data Protection Act (PDPA)",
+            "article": "Section 20",
+            "requirement": "Implement data protection frameworks and masking to prevent personal data from being stored or exposed in generative AI prompt logs.",
+            "penalty": "Financial penalty up to 1,000,000 SGD or 10% of local annual turnover, whichever is higher.",
+            "effective_date": "2021-02-01"
+        },
+        {
+            "jurisdiction": "Indonesia",
+            "law_name": "Personal Data Protection Law (PDP Law)",
+            "article": "Article 28",
+            "requirement": "Process personal data lawfully for automated decision making; provide individuals with the right to request human override review.",
+            "penalty": "Administrative fine up to 2% of annual revenues and potential criminal penalties up to 6 years imprisonment.",
+            "effective_date": "2024-10-17"
+        }
+    ],
+    "Default": [
+        {
+            "jurisdiction": "EU",
+            "law_name": "EU AI Act",
+            "article": "Article 9",
+            "requirement": "Establish a risk management system to identify, evaluate, and mitigate safety risks throughout the AI system lifecycle.",
+            "penalty": "Administrative fines up to 30,000,000 EUR or 6% of global annual turnover.",
+            "effective_date": "2026-08-01"
+        }
+    ]
+}
