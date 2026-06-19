@@ -4,6 +4,13 @@ import numpy as np
 import plotly.graph_objects as go
 import plotly.express as px
 import time
+import sys
+import os
+
+# Resolve project root directory and add it to sys.path
+root_path = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+if root_path not in sys.path:
+    sys.path.insert(0, root_path)
 
 # Set page configuration for a wide, premium layout
 st.set_page_config(
