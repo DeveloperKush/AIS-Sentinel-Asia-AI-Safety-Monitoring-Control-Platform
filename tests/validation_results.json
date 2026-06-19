@@ -1,5 +1,5 @@
 {
-    "mode": "offline",
+    "mode": "mocked",
     "metrics": {
         "accuracy": 1.0,
         "precision": 1.0,
@@ -20,9 +20,9 @@
             "match": true,
             "evaluator_output": {
                 "threat_detected": false,
-                "confidence_score": 0.1,
+                "confidence_score": 0.85,
                 "risk_category": "None",
-                "justification": "No threat keywords found",
+                "justification": "[Mocked] Article evaluated: AI trong Nông nghiệp: Hướng đi mới",
                 "entities_mentioned": [],
                 "severity": "Low"
             }
@@ -34,9 +34,9 @@
             "match": true,
             "evaluator_output": {
                 "threat_detected": false,
-                "confidence_score": 0.1,
+                "confidence_score": 0.85,
                 "risk_category": "None",
-                "justification": "No threat keywords found",
+                "justification": "[Mocked] Article evaluated: Ứng dụng máy học để phân loại hạt cà phê",
                 "entities_mentioned": [],
                 "severity": "Low"
             }
@@ -48,9 +48,9 @@
             "match": true,
             "evaluator_output": {
                 "threat_detected": false,
-                "confidence_score": 0.2,
+                "confidence_score": 0.85,
                 "risk_category": "None",
-                "justification": "No threat keywords found",
+                "justification": "[Mocked] Article evaluated: भारतीय आईटी क्षेत्र में अभूतपूर्व वृद्धि",
                 "entities_mentioned": [],
                 "severity": "Low"
             }
@@ -62,9 +62,9 @@
             "match": true,
             "evaluator_output": {
                 "threat_detected": false,
-                "confidence_score": 0.1,
+                "confidence_score": 0.85,
                 "risk_category": "None",
-                "justification": "No threat keywords found",
+                "justification": "[Mocked] Article evaluated: बेंगलुरु में नए टेक हब की स्थापना",
                 "entities_mentioned": [],
                 "severity": "Low"
             }
@@ -76,9 +76,9 @@
             "match": true,
             "evaluator_output": {
                 "threat_detected": false,
-                "confidence_score": 0.1,
+                "confidence_score": 0.85,
                 "risk_category": "None",
-                "justification": "No threat keywords found",
+                "justification": "[Mocked] Article evaluated: โรงพยาบาลอัจฉริยะในยุคดิจิทัล",
                 "entities_mentioned": [],
                 "severity": "Low"
             }
@@ -90,9 +90,9 @@
             "match": true,
             "evaluator_output": {
                 "threat_detected": false,
-                "confidence_score": 0.2,
+                "confidence_score": 0.85,
                 "risk_category": "None",
-                "justification": "No threat keywords found",
+                "justification": "[Mocked] Article evaluated: เทคโนโลยี AI กับการวินิจฉัยโรคเบื้องต้น",
                 "entities_mentioned": [],
                 "severity": "Low"
             }
@@ -104,9 +104,9 @@
             "match": true,
             "evaluator_output": {
                 "threat_detected": false,
-                "confidence_score": 0.05,
+                "confidence_score": 0.85,
                 "risk_category": "None",
-                "justification": "No threat keywords found",
+                "justification": "[Mocked] Article evaluated: Ang AI sa Edukasyon: Bagong Pag-asa",
                 "entities_mentioned": [],
                 "severity": "Low"
             }
@@ -118,9 +118,9 @@
             "match": true,
             "evaluator_output": {
                 "threat_detected": false,
-                "confidence_score": 0.2,
+                "confidence_score": 0.85,
                 "risk_category": "None",
-                "justification": "No threat keywords found",
+                "justification": "[Mocked] Article evaluated: Mga Tablet at Smart Screens sa Silid-Aralan",
                 "entities_mentioned": [],
                 "severity": "Low"
             }
@@ -132,9 +132,9 @@
             "match": true,
             "evaluator_output": {
                 "threat_detected": false,
-                "confidence_score": 0.1,
+                "confidence_score": 0.85,
                 "risk_category": "None",
-                "justification": "No threat keywords found",
+                "justification": "[Mocked] Article evaluated: AI Merevolusi E-commerce di Indonesia",
                 "entities_mentioned": [],
                 "severity": "Low"
             }
@@ -146,9 +146,9 @@
             "match": true,
             "evaluator_output": {
                 "threat_detected": false,
-                "confidence_score": 0.05,
+                "confidence_score": 0.85,
                 "risk_category": "None",
-                "justification": "No threat keywords found",
+                "justification": "[Mocked] Article evaluated: Logistik Pintar untuk Pengiriman Barang",
                 "entities_mentioned": [],
                 "severity": "Low"
             }
@@ -160,14 +160,11 @@
             "match": true,
             "evaluator_output": {
                 "threat_detected": true,
-                "confidence_score": 0.95,
-                "risk_category": "AI-EngBio integration",
-                "justification": "Offline keyword match: adn, mầm bệnh, chỉnh sửa gen, crispr",
+                "confidence_score": 0.85,
+                "risk_category": "Policy gap",
+                "justification": "[Mocked] Article evaluated: Phát hiện cơ sở chỉnh sửa gen trái phép tại tư gia",
                 "entities_mentioned": [
-                    "adn",
-                    "mầm bệnh",
-                    "chỉnh sửa gen",
-                    "crispr"
+                    "CRISPR"
                 ],
                 "severity": "High"
             }
@@ -179,13 +176,11 @@
             "match": true,
             "evaluator_output": {
                 "threat_detected": true,
-                "confidence_score": 0.85,
-                "risk_category": "Policy gap",
-                "justification": "Offline keyword match: an toàn sinh học, chỉnh sửa gen, crispr",
+                "confidence_score": 0.55,
+                "risk_category": "Dual-use hardware",
+                "justification": "[Mocked] Article evaluated: Mua bán dụng cụ CRISPR trên mạng xã hội",
                 "entities_mentioned": [
-                    "an toàn sinh học",
-                    "chỉnh sửa gen",
-                    "crispr"
+                    "CRISPR"
                 ],
                 "severity": "High"
             }
@@ -197,14 +192,11 @@
             "match": true,
             "evaluator_output": {
                 "threat_detected": true,
-                "confidence_score": 0.95,
-                "risk_category": "Policy gap",
-                "justification": "Offline keyword match: सिंथेटिक, बायोटेररिज्म, रोगजनक, dna",
+                "confidence_score": 0.85,
+                "risk_category": "AI-EngBio integration",
+                "justification": "[Mocked] Article evaluated: सिंथेटिक बायोलॉजी के लिए ओपन-सोर्स AI का खतरा",
                 "entities_mentioned": [
-                    "सिंथेटिक",
-                    "बायोटेररिज्म",
-                    "रोगजनक",
-                    "dna"
+                    "CRISPR"
                 ],
                 "severity": "High"
             }
@@ -216,13 +208,11 @@
             "match": true,
             "evaluator_output": {
                 "threat_detected": true,
-                "confidence_score": 0.85,
-                "risk_category": "AI-EngBio integration",
-                "justification": "Offline keyword match: सिंथेटिक, जीन, प्रोटीन डिजाइन",
+                "confidence_score": 0.55,
+                "risk_category": "Policy gap",
+                "justification": "[Mocked] Article evaluated: बिना नियमन के जीन सिंथेसिस AI टूल्स का प्रसार",
                 "entities_mentioned": [
-                    "सिंथेटिक",
-                    "जीन",
-                    "प्रोटीन डिजाइन"
+                    "CRISPR"
                 ],
                 "severity": "High"
             }
@@ -234,15 +224,11 @@
             "match": true,
             "evaluator_output": {
                 "threat_detected": true,
-                "confidence_score": 0.95,
+                "confidence_score": 0.85,
                 "risk_category": "AI-EngBio integration",
-                "justification": "Offline keyword match: เชื้อ, เชื้อก่อโรค, ไวรัส, อาวุธชีวภาพ, กลายพันธุ์",
+                "justification": "[Mocked] Article evaluated: การวิจัยเชื้อก่อโรคด้วย AI ที่ขาดการควบคุม",
                 "entities_mentioned": [
-                    "เชื้อ",
-                    "เชื้อก่อโรค",
-                    "ไวรัส",
-                    "อาวุธชีวภาพ",
-                    "กลายพันธุ์"
+                    "CRISPR"
                 ],
                 "severity": "High"
             }
@@ -255,12 +241,10 @@
             "evaluator_output": {
                 "threat_detected": true,
                 "confidence_score": 0.85,
-                "risk_category": "AI-EngBio integration",
-                "justification": "Offline keyword match: เชื้อ, ไวรัส, แบคทีเรีย",
+                "risk_category": "Dual-use hardware",
+                "justification": "[Mocked] Article evaluated: ซอฟต์แวร์ AI สำหรับวิศวกรรมไวรัส",
                 "entities_mentioned": [
-                    "เชื้อ",
-                    "ไวรัส",
-                    "แบคทีเรีย"
+                    "CRISPR"
                 ],
                 "severity": "High"
             }
@@ -272,14 +256,13 @@
             "match": true,
             "evaluator_output": {
                 "threat_detected": true,
-                "confidence_score": 0.7,
+                "confidence_score": 0.85,
                 "risk_category": "Policy gap",
-                "justification": "Offline keyword match: deepfake, pekeng video",
+                "justification": "[Mocked] Article evaluated: Paglaganap ng Deepfake Apps para sa Halalan",
                 "entities_mentioned": [
-                    "deepfake",
-                    "pekeng video"
+                    "CRISPR"
                 ],
-                "severity": "Medium"
+                "severity": "High"
             }
         },
         {
@@ -289,14 +272,13 @@
             "match": true,
             "evaluator_output": {
                 "threat_detected": true,
-                "confidence_score": 0.7,
+                "confidence_score": 0.55,
                 "risk_category": "Policy gap",
-                "justification": "Offline keyword match: manipulahin, voice cloner",
+                "justification": "[Mocked] Article evaluated: Murang AI Voice Cloner, Banta sa Demokrasya",
                 "entities_mentioned": [
-                    "manipulahin",
-                    "voice cloner"
+                    "CRISPR"
                 ],
-                "severity": "Medium"
+                "severity": "High"
             }
         },
         {
@@ -306,14 +288,11 @@
             "match": true,
             "evaluator_output": {
                 "threat_detected": true,
-                "confidence_score": 0.95,
+                "confidence_score": 0.85,
                 "risk_category": "AI-EngBio integration",
-                "justification": "Offline keyword match: biosekuriti, dna patogen, bioinformatika, dna",
+                "justification": "[Mocked] Article evaluated: Platform Bioinformatika Tak Berizin Beredar Luas",
                 "entities_mentioned": [
-                    "biosekuriti",
-                    "dna patogen",
-                    "bioinformatika",
-                    "dna"
+                    "CRISPR"
                 ],
                 "severity": "High"
             }
@@ -325,14 +304,11 @@
             "match": true,
             "evaluator_output": {
                 "threat_detected": true,
-                "confidence_score": 0.95,
+                "confidence_score": 0.85,
                 "risk_category": "Policy gap",
-                "justification": "Offline keyword match: sintesis, virus, genetik, keamanan hayati",
+                "justification": "[Mocked] Article evaluated: Bahaya Alat AI Sintesis Genetik Tanpa Pengawasan",
                 "entities_mentioned": [
-                    "sintesis",
-                    "virus",
-                    "genetik",
-                    "keamanan hayati"
+                    "CRISPR"
                 ],
                 "severity": "High"
             }

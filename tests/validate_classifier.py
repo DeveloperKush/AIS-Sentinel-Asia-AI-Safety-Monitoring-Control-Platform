@@ -143,17 +143,7 @@ def validate(offline=False, real_api=False):
                     category = article.get("expected_category", "None")
                     conf_range = article.get("expected_confidence_range", "high")
 
-                    # Introduce 2 intentional classification errors to show realistic metrics:
-                    # 1. FP: Thai AI Diagnosis is safe but marked as threat
-                    if title == "เทคโนโลยี AI กับการวินิจฉัยโรคเบื้องต้น":
-                        is_threat = True
-                        category = "AI-EngBio integration"
-                        conf_range = "medium"
-                    # 2. FN: Vietnamese DIY CRISPR sales is threat but marked as safe
-                    elif title == "Mua bán dụng cụ CRISPR trên mạng xã hội":
-                        is_threat = False
-                        category = "None"
-                        conf_range = "low"
+
 
                     conf = 0.85 if conf_range == "high" else (0.55 if conf_range == "medium" else 0.25)
                     return {
