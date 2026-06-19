@@ -1,17 +1,24 @@
 import os
 from dotenv import load_dotenv
 
+# Load environment variables before importing local modules
 load_dotenv()
 
-from core.llm_client import GeminiClient
+from core.database import init_db
+from core.translator import SmartTranslator
 
-client = GeminiClient()
+# Ensure the database tables exist
+init_db()
 
-# Test translation
-result = client.translate("Xin chào thế giới", "vi", "en")
-print("Translation:", result)
+# Initialize translator
+t = SmartTranslator()
 
-# Test structured output
-schema = {"type": "object", "properties": {"threat_detected": {"type": "boolean"}}}
-result = client.generate_structured("Is this a threat: 'AI gene synthesis tool released'", schema)
-print("Structured:", result)
+# Run the test
+result = t.translate_article(
+    "Tin tức về CRISPR",
+    "Công nghệ CRISPR mới được sử dụng trong nghiên cứu gene. Đây là bước tiến lớn.",
+    "vi"
+)
+
+print("Translation Result:")
+print(result)
