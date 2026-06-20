@@ -162,7 +162,7 @@ with col_center:
                     mapping = mapper.map_threat(article['risk_category'], article['source_country'])
                     if mapping:
                         for item in mapping:
-                            st.info(f"**{item['jurisdiction']} ({item['law_name']}):** {item['relevance_summary']}")
+                            st.info(f"**{item['jurisdiction']} ({item['law_name']}, {item['article']}):** {item['requirement']}")
                     else:
                         st.info("No specific policy mapping found for this risk category.")
                 except Exception:
@@ -228,7 +228,7 @@ with col_right:
                         st.markdown("**Policy Mapping:**")
                         if mapping:
                             for item in mapping:
-                                st.warning(f"⚖️ **{item['jurisdiction']} ({item['law_name']}):** {item['relevance_summary']}")
+                                st.warning(f"⚖️ **{item['jurisdiction']} ({item['law_name']}, {item['article']}):** {item['requirement']}")
                         else:
                             st.info("No specific policy mapping found for this risk category.")
 
