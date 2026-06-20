@@ -12,4 +12,4 @@ httpx
 python-multipart
 python-decouple
 fastapi-limiter
-# vllm
+vllm
