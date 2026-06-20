@@ -62,33 +62,36 @@ DEMO_SCENARIOS = {
 
 # --- Helper functions to render slide ---
 def render_slide(steps, step_index):
-    # Dummy renderer that returns a PIL Image
-    img = Image.new('RGB', (800, 600), color='white')
-    draw = ImageDraw.Draw(img)
+    from modules.agentguard.environment import SlideEnvironment
+    
+    # Initialize slide environment with the correct aspect ratio
+    slide = SlideEnvironment(width=1200, height=800)
     
     current_steps = steps[:step_index + 1]
     
     for step in current_steps:
-        action = step["action"]
+        action = step.get("action") or step.get("tool")
         params = step["params"]
         
         if action == "set_background":
-            img = Image.new('RGB', (800, 600), color=params.get("color", "#ffffff"))
-            draw = ImageDraw.Draw(img)
+            slide.set_background(params.get("color", "#ffffff"))
         elif action == "add_text":
-            x, y = params.get("x", 0), params.get("y", 0)
-            text = params.get("text", "")
-            size = params.get("size", 12)
-            color = params.get("color", "black")
-            # Drawing a rough representation
-            draw.text((x, y), text, fill=color)
+            x = params.get("x", 0)
+            y = params.get("y", 0)
+            text = params.get("text") or params.get("content", "")
+            size = params.get("size") or params.get("font_size", 24)
+            color = params.get("color", "#FFFFFF")
+            slide.add_text(x, y, text, color, size)
         elif action == "add_image":
-            x, y = params.get("x", 0), params.get("y", 0)
-            # Draw a placeholder box for image
-            draw.rectangle([x, y, x+100, y+100], outline="blue", width=2)
-            draw.text((x+5, y+5), "IMG", fill="blue")
+            x = params.get("x", 0)
+            y = params.get("y", 0)
+            src = params.get("url") or params.get("src", "")
+            width = params.get("width", 100)
+            height = params.get("height", 100)
+            slide.add_image(x, y, src, width, height)
             
-    return img
+    reveal = st.session_state.get("revealed", False)
+    return slide.render(reveal=reveal)
 
 # --- Session State Initialization ---
 if 'run_clicked' not in st.session_state:
