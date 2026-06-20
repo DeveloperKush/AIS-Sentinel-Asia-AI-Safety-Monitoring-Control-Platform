@@ -35,3 +35,12 @@ ENV/
 # OS
 .DS_Store
 Thumbs.db
+
+# Root test files
+/test_agentguard.py
+/test_agentguard_monitor.py
+/test_all.py
+/test_script_run.py
+/test_snippet.py
+/test_sentinel_temp.db
+/AIS-Sentinel_PRD_v2.pdf

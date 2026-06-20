@@ -18,7 +18,8 @@
   <a href="#-quickstart"><img src="https://img.shields.io/badge/🚀_Get_Started-→-00d2ff?style=for-the-badge&labelColor=0d1117" alt="Get Started"/></a>&nbsp;
   <a href="#%EF%B8%8F-system-architecture"><img src="https://img.shields.io/badge/🏗️_Architecture-→-7f5af0?style=for-the-badge&labelColor=0d1117" alt="Architecture"/></a>&nbsp;
   <a href="#-key-results"><img src="https://img.shields.io/badge/📊_Results-→-2cb67d?style=for-the-badge&labelColor=0d1117" alt="Results"/></a>&nbsp;
-  <a href="#-module-deep-dives"><img src="https://img.shields.io/badge/🔬_Deep_Dive-→-e6b800?style=for-the-badge&labelColor=0d1117" alt="Deep Dive"/></a>
+  <a href="#-module-deep-dives"><img src="https://img.shields.io/badge/🔬_Deep_Dive-→-e6b800?style=for-the-badge&labelColor=0d1117" alt="Deep Dive"/></a>&nbsp;
+  <a href="TECHNICAL_SUMMARY.md"><img src="https://img.shields.io/badge/📝_Tech_Summary-→-ff6b6b?style=for-the-badge&labelColor=0d1117" alt="Technical Summary"/></a>
 </p>
 
 <br/>
@@ -251,7 +252,7 @@ AIS-Sentinel/
 ├── .env                                  # 🔐 GEMINI_API_KEY
 ├── .gitignore
 ├── requirements.txt                      # Python dependencies
-├── TECHNICAL_SUMMARY.md                  # Academic summary for submission
+├── [TECHNICAL_SUMMARY.md](TECHNICAL_SUMMARY.md)                  # Academic summary for submission
 └── README.md                             # 📖 You are here
 ```
 
@@ -602,7 +603,6 @@ These findings carry **immediate regulatory significance:**
 | Core Pipeline | `core/test.py` | LLM client, translator, DB operations |
 | Integration | `tests/test_integration.py` | All 4 modules end-to-end with mock data |
 | Classifier | `tests/validate_classifier.py` | 20-article labeled set (5 languages) |
-| AgentGuard | `test_agentguard.py` | Agent + monitor pipeline |
 
 ```bash
 # Run all tests
