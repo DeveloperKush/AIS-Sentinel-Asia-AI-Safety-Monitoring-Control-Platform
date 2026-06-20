@@ -13,7 +13,7 @@ import streamlit as st
 
 # Set main page configuration (only called once for the entire application session)
 st.set_page_config(
-    page_title="AIS-Sentinel",
+    page_title="AIS-Sentinel | AI Safety for the Global South",
     page_icon="🛡️",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -22,53 +22,497 @@ st.set_page_config(
 # Override st.set_page_config to prevent exceptions when subpages call it via exec()
 st.set_page_config = lambda *args, **kwargs: None
 
-# Premium Sidebar Dark Styling
+# ╔══════════════════════════════════════════════════════════════════════╗
+# ║                    GLOBAL CSS — MISSION CONTROL THEME               ║
+# ╚══════════════════════════════════════════════════════════════════════╝
 st.markdown("""
-    <style>
-        [data-testid="stSidebarNav"] {
-            display: none !important;
-        }
-        [data-testid="stSidebar"] {
-            background-color: #0b0c10;
-            color: #c5c6c7;
-        }
-        [data-testid="stSidebar"] * {
-            color: #c5c6c7;
-        }
-        .sidebar-title {
-            font-size: 2.2rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #6f42c1 0%, #007bff 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 2px;
-            letter-spacing: -0.5px;
-        }
-        .sidebar-subtitle {
-            font-size: 0.9rem;
-            color: #8892b0;
-            margin-bottom: 25px;
-            font-weight: 500;
-        }
-        /* Style navigation radio widget */
-        div.row-widget.stRadio > div {
-            background-color: #1f2833;
-            border-radius: 8px;
-            padding: 12px;
-            border: 1px solid #45f3ff33;
-        }
-        .sidebar-badge {
-            background-color: rgba(111, 66, 193, 0.15);
-            color: #a855f7;
-            border: 1px solid rgba(111, 66, 193, 0.3);
-            padding: 10px 14px;
-            border-radius: 8px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            text-align: center;
-            margin-top: 40px;
-        }
-    </style>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+    /* ── CSS Custom Properties ── */
+    :root {
+        --bg-primary: #060910;
+        --bg-secondary: #0c1220;
+        --bg-card: rgba(14, 21, 38, 0.85);
+        --bg-glass: rgba(14, 21, 38, 0.6);
+        --accent-primary: #00d4ff;
+        --accent-secondary: #ff6b6b;
+        --accent-tertiary: #a78bfa;
+        --accent-glow: rgba(0, 212, 255, 0.25);
+        --accent-glow-strong: rgba(0, 212, 255, 0.45);
+        --text-primary: #e6edf3;
+        --text-secondary: #8b9dc3;
+        --text-muted: #6b7c96;
+        --border-subtle: rgba(0, 212, 255, 0.08);
+        --border-accent: rgba(0, 212, 255, 0.2);
+        --success: #00d9a3;
+        --warning: #ff9f43;
+        --danger: #ff4d6d;
+        --radius-sm: 8px;
+        --radius-md: 12px;
+        --radius-lg: 16px;
+        --radius-xl: 20px;
+        --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+        --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.5);
+        --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.6);
+        --shadow-glow: 0 0 25px var(--accent-glow);
+        --shadow-glow-strong: 0 0 40px var(--accent-glow-strong);
+        --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        --font-heading: 'Space Grotesk', sans-serif;
+        --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    /* ── Keyframe Animations ── */
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(24px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    @keyframes pulseGlow {
+        0%, 100% { box-shadow: 0 0 15px var(--accent-glow); }
+        50% { box-shadow: 0 0 30px var(--accent-glow-strong); }
+    }
+    @keyframes shimmer {
+        0% { background-position: -200% center; }
+        100% { background-position: 200% center; }
+    }
+    @keyframes scanline {
+        0% { transform: translateY(-100%); }
+        100% { transform: translateY(100vh); }
+    }
+    @keyframes borderGlow {
+        0%, 100% { border-color: rgba(0, 212, 255, 0.1); }
+        50% { border-color: rgba(0, 212, 255, 0.3); }
+    }
+    @keyframes slideInLeft {
+        from { opacity: 0; transform: translateX(-20px); }
+        to { opacity: 1; transform: translateX(0); }
+    }
+
+    /* ── Global App Background ── */
+    .stApp {
+        background: linear-gradient(160deg, #060910 0%, #0a0f1c 30%, #0c1428 60%, #080d18 100%) !important;
+        color: var(--text-primary) !important;
+        font-family: var(--font-body) !important;
+    }
+
+    /* ── Widen Content Layout ── */
+    [data-testid="block-container"],
+    .block-container {
+        max-width: 95% !important;
+        padding-left: 2.5rem !important;
+        padding-right: 2.5rem !important;
+        padding-top: 2rem !important;
+        padding-bottom: 2rem !important;
+    }
+    .stApp::before {
+        content: '';
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background:
+            radial-gradient(ellipse at 20% 50%, rgba(0, 212, 255, 0.03) 0%, transparent 50%),
+            radial-gradient(ellipse at 80% 20%, rgba(167, 139, 250, 0.02) 0%, transparent 50%),
+            radial-gradient(ellipse at 50% 80%, rgba(255, 107, 107, 0.02) 0%, transparent 50%);
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    /* ── Custom Scrollbar ── */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg-primary); }
+    ::-webkit-scrollbar-thumb {
+        background: linear-gradient(180deg, var(--accent-primary), var(--accent-tertiary));
+        border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover { background: var(--accent-primary); }
+
+    /* ── Headings & Text ── */
+    .stApp h1, .stApp h2, .stApp h3, .stApp h4 {
+        font-family: var(--font-heading) !important;
+        color: var(--text-primary) !important;
+        letter-spacing: -0.02em !important;
+    }
+    .stApp h1 { font-weight: 700 !important; }
+    .stApp h2 { font-weight: 600 !important; }
+    .stApp h3 { font-weight: 600 !important; color: var(--text-secondary) !important; }
+    .stApp p {
+        font-family: var(--font-body);
+    }
+    .stMarkdown { color: var(--text-primary); }
+
+    /* ── Widget Labels (Visibility Fix) ── */
+    label[data-testid="stWidgetLabel"],
+    label[data-testid="stWidgetLabel"] p,
+    .stWidgetLabel p {
+        color: var(--text-secondary) !important;
+        font-family: var(--font-heading) !important;
+        font-weight: 500 !important;
+    }
+
+    /* ── Buttons ── */
+    .stButton > button {
+        background: linear-gradient(135deg, rgba(0, 212, 255, 0.15) 0%, rgba(0, 212, 255, 0.05) 100%) !important;
+        color: var(--accent-primary) !important;
+        border: 1px solid rgba(0, 212, 255, 0.3) !important;
+        border-radius: var(--radius-sm) !important;
+        font-family: var(--font-heading) !important;
+        font-weight: 600 !important;
+        letter-spacing: 0.02em !important;
+        padding: 0.5rem 1.5rem !important;
+        transition: var(--transition) !important;
+        backdrop-filter: blur(10px) !important;
+    }
+    .stButton > button:hover {
+        background: linear-gradient(135deg, rgba(0, 212, 255, 0.25) 0%, rgba(0, 212, 255, 0.1) 100%) !important;
+        border-color: var(--accent-primary) !important;
+        box-shadow: var(--shadow-glow) !important;
+        transform: translateY(-1px) !important;
+    }
+    .stButton > button:active {
+        transform: translateY(0px) !important;
+    }
+    /* Primary button overrides */
+    .stButton > button[kind="primary"],
+    .stButton > button[data-testid="stBaseButton-primary"] {
+        background: linear-gradient(135deg, #00d4ff 0%, #0098b3 100%) !important;
+        color: #060910 !important;
+        border: none !important;
+        font-weight: 700 !important;
+    }
+    .stButton > button[kind="primary"]:hover,
+    .stButton > button[data-testid="stBaseButton-primary"]:hover {
+        box-shadow: 0 0 30px rgba(0, 212, 255, 0.5) !important;
+    }
+
+    /* ── Download Button ── */
+    .stDownloadButton > button {
+        background: rgba(0, 212, 255, 0.08) !important;
+        color: var(--accent-primary) !important;
+        border: 1px solid rgba(0, 212, 255, 0.2) !important;
+        border-radius: var(--radius-sm) !important;
+        font-family: var(--font-heading) !important;
+        font-weight: 500 !important;
+        transition: var(--transition) !important;
+    }
+    .stDownloadButton > button:hover {
+        background: rgba(0, 212, 255, 0.15) !important;
+        box-shadow: var(--shadow-glow) !important;
+    }
+
+    /* ── Metric Cards ── */
+    [data-testid="stMetric"],
+    [data-testid="stMetricValue"],
+    div[data-testid="stMetric"] {
+        background: var(--bg-card) !important;
+        border: 1px solid var(--border-subtle) !important;
+        border-radius: var(--radius-md) !important;
+        padding: 1rem !important;
+        backdrop-filter: blur(12px) !important;
+        transition: var(--transition) !important;
+    }
+    [data-testid="stMetric"]:hover {
+        border-color: var(--border-accent) !important;
+        box-shadow: var(--shadow-glow) !important;
+    }
+    [data-testid="stMetric"] label,
+    [data-testid="stMetricLabel"] {
+        color: var(--text-secondary) !important;
+        font-family: var(--font-heading) !important;
+        text-transform: uppercase !important;
+        font-size: 0.75rem !important;
+        letter-spacing: 0.08em !important;
+    }
+    [data-testid="stMetricValue"] {
+        color: var(--accent-primary) !important;
+        font-family: var(--font-heading) !important;
+        font-weight: 700 !important;
+    }
+
+    /* ── DataFrames ── */
+    .stDataFrame, [data-testid="stDataFrame"] {
+        background: var(--bg-card) !important;
+        border-radius: var(--radius-md) !important;
+        border: 1px solid var(--border-subtle) !important;
+        overflow: hidden !important;
+    }
+
+    /* ── Expanders ── */
+    [data-testid="stExpander"] {
+        background: var(--bg-card) !important;
+        border: 1px solid var(--border-subtle) !important;
+        border-radius: var(--radius-md) !important;
+        margin-bottom: 0.5rem !important;
+        transition: var(--transition) !important;
+    }
+    [data-testid="stExpander"]:hover {
+        border-color: var(--border-accent) !important;
+    }
+    [data-testid="stExpander"] summary,
+    .streamlit-expanderHeader {
+        background: transparent !important;
+        color: var(--text-primary) !important;
+        font-family: var(--font-heading) !important;
+        font-weight: 500 !important;
+    }
+    .streamlit-expanderContent,
+    [data-testid="stExpander"] > div:last-child {
+        background: rgba(6, 9, 16, 0.5) !important;
+        border-top: 1px solid var(--border-subtle) !important;
+        border-left: 3px solid var(--accent-primary) !important;
+    }
+
+    /* ── Inputs ── */
+    .stTextInput > div > div > input,
+    .stTextArea > div > div > textarea {
+        background: rgba(14, 21, 38, 0.8) !important;
+        color: var(--text-primary) !important;
+        border: 1px solid var(--border-subtle) !important;
+        border-radius: var(--radius-sm) !important;
+        font-family: var(--font-body) !important;
+        transition: var(--transition) !important;
+    }
+    .stTextInput > div > div > input:focus,
+    .stTextArea > div > div > textarea:focus {
+        border-color: var(--accent-primary) !important;
+        box-shadow: 0 0 0 3px var(--accent-glow), inset 0 0 20px rgba(0, 212, 255, 0.05) !important;
+    }
+
+    /* ── Selectboxes & Multiselects ── */
+    div[data-baseweb="select"],
+    div[data-baseweb="select"] > div {
+        background: rgba(14, 21, 38, 0.8) !important;
+        background-color: rgba(14, 21, 38, 0.8) !important;
+        border: 1px solid var(--border-subtle) !important;
+        border-radius: var(--radius-sm) !important;
+        transition: var(--transition) !important;
+    }
+    div[data-baseweb="select"]:hover,
+    div[data-baseweb="select"] > div:hover {
+        border-color: var(--border-accent) !important;
+    }
+    div[data-baseweb="select"] * {
+        color: var(--text-primary) !important;
+    }
+    /* Selectbox dropdown list items and containers */
+    div[role="listbox"],
+    div[role="listbox"] ul,
+    [data-baseweb="popover"],
+    [data-baseweb="menu"] {
+        background-color: #0c1220 !important;
+        background: #0c1220 !important;
+        border: 1px solid var(--border-accent) !important;
+    }
+    
+    div[role="listbox"] [role="option"],
+    div[role="option"],
+    li[role="option"] {
+        background-color: #0c1220 !important;
+        color: var(--text-primary) !important;
+    }
+    
+    div[role="listbox"] [role="option"]:hover,
+    div[role="option"]:hover,
+    li[role="option"]:hover,
+    [role="option"][aria-selected="true"] {
+        background-color: rgba(0, 212, 255, 0.15) !important;
+        color: var(--accent-primary) !important;
+    }
+
+    /* ── Radio Buttons ── */
+    .stRadio > div {
+        background: transparent !important;
+    }
+    .stRadio > div label,
+    .stRadio > div label p,
+    .stRadio > div label span {
+        color: var(--text-primary) !important;
+        transition: var(--transition) !important;
+    }
+
+    /* ── Sliders ── */
+    .stSlider > div > div > div > div {
+        background: var(--accent-primary) !important;
+    }
+    .stSlider [data-testid="stTickBar"] div,
+    .stSlider [data-testid="stTickBar"] span {
+        color: var(--text-secondary) !important;
+    }
+
+    /* ── Progress Bar ── */
+    .stProgress > div > div > div {
+        background: linear-gradient(90deg, var(--accent-primary), var(--accent-tertiary)) !important;
+        border-radius: 4px !important;
+    }
+    .stProgress > div > div {
+        background: rgba(14, 21, 38, 0.8) !important;
+        border-radius: 4px !important;
+    }
+
+    /* ── Alerts ── */
+    .stAlert, [data-testid="stAlert"] {
+        background: var(--bg-card) !important;
+        border-radius: var(--radius-md) !important;
+        border: 1px solid var(--border-subtle) !important;
+        backdrop-filter: blur(10px) !important;
+    }
+    /* Info */
+    div[data-testid="stAlert"][data-baseweb*="notification"] {
+        background: rgba(0, 212, 255, 0.06) !important;
+        border-left: 3px solid var(--accent-primary) !important;
+    }
+
+    /* ── Tabs ── */
+    .stTabs [data-baseweb="tab-list"] {
+        background: transparent !important;
+        gap: 4px;
+    }
+    .stTabs [data-baseweb="tab"] {
+        background: transparent !important;
+        color: var(--text-secondary) !important;
+        border-radius: var(--radius-sm) !important;
+        transition: var(--transition) !important;
+    }
+    .stTabs [aria-selected="true"] {
+        background: rgba(0, 212, 255, 0.1) !important;
+        color: var(--accent-primary) !important;
+        border-bottom: 2px solid var(--accent-primary) !important;
+    }
+
+    /* ── Dividers ── */
+    hr {
+        border: none !important;
+        height: 1px !important;
+        background: linear-gradient(90deg, transparent, var(--border-accent), transparent) !important;
+        margin: 1.5rem 0 !important;
+    }
+
+    /* ── Captions ── */
+    .stCaption, [data-testid="stCaptionContainer"] {
+        color: var(--text-muted) !important;
+        font-size: 0.8rem !important;
+        font-style: italic !important;
+    }
+
+    /* ── Checkboxes ── */
+    [data-testid="stCheckbox"] p,
+    .stCheckbox label p,
+    .stCheckbox label span {
+        color: var(--text-primary) !important;
+    }
+
+    /* ── Spinner ── */
+    .stSpinner > div {
+        border-top-color: var(--accent-primary) !important;
+    }
+
+    /* ──────────────────────────────────────── */
+    /* ──         SIDEBAR STYLING             ── */
+    /* ──────────────────────────────────────── */
+    [data-testid="stSidebarNav"] {
+        display: none !important;
+    }
+    [data-testid="stSidebar"] {
+        background: linear-gradient(180deg, #070b14 0%, #0a1020 50%, #060910 100%) !important;
+        border-right: 1px solid var(--border-subtle) !important;
+    }
+    [data-testid="stSidebar"]::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background:
+            radial-gradient(ellipse at 50% 0%, rgba(0, 212, 255, 0.04) 0%, transparent 60%);
+        pointer-events: none;
+    }
+    [data-testid="stSidebar"] * {
+        color: var(--text-secondary) !important;
+    }
+
+    /* Sidebar Title */
+    .sidebar-title {
+        font-family: var(--font-heading) !important;
+        font-size: 2rem;
+        font-weight: 700;
+        background: linear-gradient(135deg, #00d4ff 0%, #a78bfa 50%, #ff6b6b 100%);
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: shimmer 4s linear infinite;
+        margin-bottom: 0;
+        letter-spacing: -0.03em;
+        line-height: 1.2;
+    }
+    .sidebar-subtitle {
+        font-family: var(--font-body);
+        font-size: 0.82rem;
+        color: var(--text-muted) !important;
+        margin-bottom: 1.5rem;
+        font-weight: 400;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+    }
+
+    /* Nav Radio in Sidebar */
+    [data-testid="stSidebar"] .stRadio > div {
+        background: rgba(0, 212, 255, 0.03) !important;
+        border-radius: var(--radius-md) !important;
+        padding: 8px !important;
+        border: 1px solid var(--border-subtle) !important;
+    }
+    [data-testid="stSidebar"] .stRadio > div > label {
+        padding: 0.6rem 1rem !important;
+        border-radius: var(--radius-sm) !important;
+        transition: var(--transition) !important;
+        cursor: pointer !important;
+    }
+    [data-testid="stSidebar"] .stRadio > div > label:hover {
+        background: rgba(0, 212, 255, 0.08) !important;
+    }
+    [data-testid="stSidebar"] .stRadio > div > label[data-checked="true"],
+    [data-testid="stSidebar"] .stRadio > div > label:has(input:checked) {
+        background: rgba(0, 212, 255, 0.12) !important;
+        border-left: 3px solid var(--accent-primary) !important;
+    }
+    [data-testid="stSidebar"] .stRadio > div > label:has(input:checked) span {
+        color: var(--accent-primary) !important;
+        font-weight: 600 !important;
+    }
+
+    /* Sidebar Badge */
+    .sidebar-badge {
+        background: rgba(0, 212, 255, 0.05);
+        color: var(--accent-primary) !important;
+        border: 1px solid rgba(0, 212, 255, 0.15);
+        padding: 12px 16px;
+        border-radius: var(--radius-md);
+        font-size: 0.78rem;
+        font-weight: 500;
+        text-align: center;
+        margin-top: 2rem;
+        font-family: var(--font-heading);
+        letter-spacing: 0.02em;
+        animation: borderGlow 3s ease-in-out infinite;
+    }
+
+    /* ── Hide Streamlit branding ── */
+    #MainMenu { visibility: hidden; }
+    footer { visibility: hidden; }
+    header[data-testid="stHeader"] {
+        background: transparent !important;
+    }
+
+    /* ── Plotly Charts Dark Theme ── */
+    .js-plotly-plot .plotly .modebar {
+        background: transparent !important;
+    }
+    .js-plotly-plot .plotly .modebar-btn path {
+        fill: var(--text-muted) !important;
+    }
+
+</style>
 """, unsafe_allow_html=True)
 
 # Database Initialization and Seeding on first session load
@@ -264,10 +708,18 @@ if "initialized" not in st.session_state:
     except Exception:
         pass
 
-# Sidebar layout assembly
+# ╔══════════════════════════════════════════════════════════════════════╗
+# ║                          SIDEBAR LAYOUT                            ║
+# ╚══════════════════════════════════════════════════════════════════════╝
 with st.sidebar:
-    st.markdown('<div class="sidebar-title">AIS-Sentinel</div>', unsafe_allow_html=True)
-    st.markdown('<div class="sidebar-subtitle">AI Safety for the Global South</div>', unsafe_allow_html=True)
+    st.markdown('<div class="sidebar-title">🛡️ AIS-Sentinel</div>', unsafe_allow_html=True)
+    st.markdown('<div class="sidebar-subtitle">AI Safety · Global South</div>', unsafe_allow_html=True)
+    
+    st.markdown("""
+        <div style="width: 100%; height: 1px; 
+                    background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.3), transparent); 
+                    margin: 0.5rem 0 1.5rem 0;"></div>
+    """, unsafe_allow_html=True)
     
     # Navigation Radio
     page = st.radio(
@@ -277,7 +729,12 @@ with st.sidebar:
     )
 
     # Bottom Badge
-    st.markdown('<div class="sidebar-badge">🚀 Global South AIS Challenge 2026<br/>Track 3 — Technical Safety</div>', unsafe_allow_html=True)
+    st.markdown("""
+        <div class="sidebar-badge">
+            🚀 Global South AIS Challenge 2026<br/>
+            <span style="opacity: 0.7; font-size: 0.72rem;">Track 3 — Technical Safety</span>
+        </div>
+    """, unsafe_allow_html=True)
 
 # Page Routing execution block
 def main():

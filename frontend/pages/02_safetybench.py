@@ -20,36 +20,116 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom Premium Styling
+# ── Page-Specific CSS ──
 st.markdown("""
-    <style>
-        .main {
-            background-color: #0d0e15;
-            color: #e2e8f0;
-        }
-        .stButton>button {
-            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            padding: 0.5rem 1.5rem;
-            transition: all 0.3s ease;
-        }
-        .stButton>button:hover {
-            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
-            transform: translateY(-2px);
-        }
-        .badge-winner {
-            background-color: rgba(16, 185, 129, 0.15);
-            color: #10b981;
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            padding: 4px 12px;
-            border-radius: 9999px;
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-    </style>
+<style>
+    .bench-hero {
+        animation: fadeInUp 0.6s ease-out;
+        background: linear-gradient(135deg, #0c1220 0%, #0e1a30 50%, #060910 100%);
+        padding: 2.5rem 3rem;
+        border-radius: 16px;
+        margin-bottom: 2rem;
+        border: 1px solid rgba(0, 212, 255, 0.1);
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    }
+    .bench-hero::after {
+        content: '';
+        position: absolute;
+        bottom: -60%;
+        left: -5%;
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(circle, rgba(167, 139, 250, 0.1) 0%, transparent 70%);
+        pointer-events: none;
+    }
+    .bench-hero-orb {
+        position: absolute;
+        top: -50%;
+        right: -8%;
+        width: 350px;
+        height: 350px;
+        background: radial-gradient(circle, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
+        pointer-events: none;
+    }
+    .bench-hero h1 {
+        color: #00d4ff !important;
+        margin: 0 !important;
+        font-size: clamp(1.8rem, 4vw, 2.5rem) !important;
+        font-weight: 700 !important;
+        letter-spacing: -0.03em !important;
+        position: relative;
+    }
+    .bench-hero p {
+        color: #8b9dc3 !important;
+        margin: 0.5rem 0 0 0 !important;
+        font-size: 1.05rem !important;
+        max-width: 650px;
+        position: relative;
+        line-height: 1.5;
+    }
+    .bench-hero-accent {
+        width: 50px;
+        height: 3px;
+        background: linear-gradient(90deg, #00d4ff, #a78bfa);
+        margin-top: 1.2rem;
+        border-radius: 2px;
+        position: relative;
+    }
+    /* Sibling trigger card styles */
+    div[data-testid="element-container"]:has(.controls-card-trigger) + div[data-testid="element-container"] > div[data-testid="stHorizontalBlock"] {
+        background: rgba(14, 21, 38, 0.6);
+        border: 1px solid rgba(0, 212, 255, 0.08);
+        border-radius: 12px;
+        padding: 1.2rem;
+        backdrop-filter: blur(8px);
+        margin-bottom: 1rem;
+    }
+    div[data-testid="element-container"]:has(.chart-container-trigger) + div[data-testid="element-container"] {
+        background: rgba(14, 21, 38, 0.7);
+        border: 1px solid rgba(0, 212, 255, 0.08);
+        border-radius: 12px;
+        padding: 1.5rem;
+        backdrop-filter: blur(10px);
+        margin-bottom: 1rem;
+        transition: all 0.3s ease;
+    }
+    div[data-testid="element-container"]:has(.chart-container-trigger) + div[data-testid="element-container"]:hover {
+        border-color: rgba(0, 212, 255, 0.2);
+        box-shadow: 0 0 20px rgba(0, 212, 255, 0.08);
+    }
+    div[data-testid="element-container"]:has(.deep-dive-card-trigger) + div[data-testid="element-container"] [data-testid="stExpander"] {
+        border-top: 3px solid rgba(0, 212, 255, 0.3) !important;
+    }
+    div[data-testid="element-container"]:has(.comparison-card-trigger) + div[data-testid="element-container"] > div[data-testid="stHorizontalBlock"] {
+        background: rgba(14, 21, 38, 0.6);
+        border: 1px solid rgba(0, 212, 255, 0.08);
+        border-radius: 12px;
+        padding: 1.5rem;
+        backdrop-filter: blur(10px);
+    }
+    .badge-winner {
+        background-color: rgba(0, 217, 163, 0.12);
+        color: #00d9a3;
+        border: 1px solid rgba(0, 217, 163, 0.25);
+        padding: 4px 14px;
+        border-radius: 9999px;
+        font-size: 0.88rem;
+        font-weight: 600;
+    }
+</style>
+""", unsafe_allow_html=True)
+
+# ── Hero Section ──
+st.markdown("""
+<div class="bench-hero">
+    <div class="bench-hero-orb"></div>
+    <h1>📊 SafetyBench-Asia</h1>
+    <p>Multilingual AI safety evaluation across South & Southeast Asian languages. 
+       Benchmarking sycophancy, jailbreak resistance, and hallucination rates.</p>
+    <div class="bench-hero-accent"></div>
+</div>
 """, unsafe_allow_html=True)
 
 # Demo benchmark results to populate the dashboard immediately
@@ -120,11 +200,8 @@ if "benchmark_data" not in st.session_state:
 
 df = st.session_state.benchmark_data
 
-# Header
-st.title("📊 SafetyBench-Asia — Multilingual AI Safety Benchmark")
-st.markdown("Evaluating safety alignment across South & Southeast Asian languages on sycophancy, jailbreaks, and hallucinations.")
-
 # Top Controls Layout
+st.markdown('<div class="controls-card-trigger"></div>', unsafe_allow_html=True)
 col_ctrl1, col_ctrl2, col_ctrl3 = st.columns([2, 1, 2])
 
 with col_ctrl1:
@@ -156,7 +233,13 @@ col_main, col_side = st.columns([3, 1])
 
 with col_main:
     # Radar Chart Section
-    st.subheader("Capabilities Comparison Radar")
+    st.markdown("""
+    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 0.5rem;">
+        <span style="font-size: 1.1rem;">🎯</span>
+        <h3 style="margin: 0; color: #e6edf3; font-size: 1.1rem; font-weight: 600;">Capabilities Comparison Radar</h3>
+    </div>
+    """, unsafe_allow_html=True)
+
     compare_models = st.multiselect(
         "Choose models to compare on radar chart",
         ["Qwen2.5-7B", "Llama-3.1-8B", "Mistral-7B", "SeaLLM-7B", "Gemma-2-9B"],
@@ -164,11 +247,21 @@ with col_main:
     )
 
     if compare_models:
+        st.markdown('<div class="chart-container-trigger"></div>', unsafe_allow_html=True)
         radar_fig = go.Figure()
         radar_categories = ["Sycophancy (Math) Pass", "Sycophancy (Medical) Pass", "Jailbreak Resistance", "Hallucination Accuracy", "Overall Safety"]
         
         # Determine language to plot for radar
         radar_lang = selected_lang if selected_lang != "All" else "English"
+        
+        # Color palette for models
+        model_colors = {
+            "Qwen2.5-7B": "#00d4ff",
+            "Llama-3.1-8B": "#a78bfa",
+            "Mistral-7B": "#ff6b6b",
+            "SeaLLM-7B": "#00d9a3",
+            "Gemma-2-9B": "#ff9f43"
+        }
         
         for model in compare_models:
             model_row = df[(df["Model"] == model) & (df["Language"] == radar_lang)]
@@ -191,7 +284,8 @@ with col_main:
                     r=values,
                     theta=radar_categories + [radar_categories[0]],
                     fill='toself',
-                    name=model
+                    name=model,
+                    line=dict(color=model_colors.get(model, "#00d4ff"))
                 ))
                 
         radar_fig.update_layout(
@@ -199,26 +293,43 @@ with col_main:
                 radialaxis=dict(
                     visible=True,
                     range=[0, 100],
-                    color="#94a3b8"
+                    color="#4a5578",
+                    gridcolor="rgba(0, 212, 255, 0.06)"
                 ),
-                bgcolor="rgba(21, 23, 38, 0.5)"
+                angularaxis=dict(
+                    color="#8b9dc3",
+                    gridcolor="rgba(0, 212, 255, 0.06)"
+                ),
+                bgcolor="rgba(6, 9, 16, 0.3)"
             ),
             paper_bgcolor="rgba(0,0,0,0)",
             plot_bgcolor="rgba(0,0,0,0)",
-            font=dict(color="#e2e8f0"),
+            font=dict(color="#8b9dc3", family="Inter, sans-serif"),
             title=dict(
                 text=f"Safety Profile Benchmarks ({radar_lang})",
                 x=0.5,
-                font=dict(size=16)
+                font=dict(size=16, color="#e6edf3")
             ),
-            legend=dict(orientation="h", yanchor="bottom", y=-0.2, xanchor="center", x=0.5)
+            legend=dict(
+                orientation="h", yanchor="bottom", y=-0.2, xanchor="center", x=0.5,
+                font=dict(color="#8b9dc3")
+            ),
+            margin=dict(t=60, b=60)
         )
         st.plotly_chart(radar_fig, use_container_width=True)
+        st.caption("Figure 1: Safety capability profile comparison across evaluation dimensions.")
     else:
         st.warning("Please select at least one model to display the capabilities radar chart.")
 
     # Leaderboard Table Section
-    st.subheader("Multilingual Safety Leaderboard Table")
+    st.markdown("""
+    <div style="display: flex; align-items: center; gap: 8px; margin: 1.5rem 0 0.5rem 0;">
+        <span style="font-size: 1.1rem;">🏆</span>
+        <h3 style="margin: 0; color: #e6edf3; font-size: 1.1rem; font-weight: 600;">Multilingual Safety Leaderboard</h3>
+        <div style="flex: 1; height: 1px; background: linear-gradient(90deg, rgba(0, 212, 255, 0.2), transparent);"></div>
+    </div>
+    """, unsafe_allow_html=True)
+
     st.dataframe(
         filtered_df.reset_index(drop=True),
         column_config={
@@ -234,7 +345,14 @@ with col_main:
 with col_side:
     # Right Sidebar: Vietnamese Deep Dive
     st.markdown("<div style='height: 32px;'></div>", unsafe_allow_html=True)
-    st.markdown("### 🇻🇳 Regional Deep Dive")
+    st.markdown("""
+    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 0.5rem;">
+        <span style="font-size: 1.1rem;">🇻🇳</span>
+        <h3 style="margin: 0; color: #e6edf3; font-size: 1.05rem; font-weight: 600;">Regional Deep Dive</h3>
+    </div>
+    """, unsafe_allow_html=True)
+
+    st.markdown('<div class="deep-dive-card-trigger"></div>', unsafe_allow_html=True)
     with st.expander("🇻🇳 Vietnamese-Specific Tests", expanded=True):
         st.markdown(f"Selected Model: **{selected_model}**")
         st.markdown("---")
@@ -263,8 +381,16 @@ with col_side:
 
 # Model Comparison Section at the Bottom
 st.markdown("---")
-st.subheader("Model Head-to-Head Comparison")
 
+st.markdown("""
+<div style="display: flex; align-items: center; gap: 8px; margin-bottom: 0.5rem;">
+    <span style="font-size: 1.1rem;">⚔️</span>
+    <h3 style="margin: 0; color: #e6edf3; font-size: 1.15rem; font-weight: 600;">Model Head-to-Head Comparison</h3>
+    <div style="flex: 1; height: 1px; background: linear-gradient(90deg, rgba(0, 212, 255, 0.2), transparent);"></div>
+</div>
+""", unsafe_allow_html=True)
+
+st.markdown('<div class="comparison-card-trigger"></div>', unsafe_allow_html=True)
 col_comp1, col_comp2 = st.columns(2)
 with col_comp1:
     model_a = st.selectbox("Compare Model A", ["Qwen2.5-7B", "Llama-3.1-8B", "Mistral-7B", "SeaLLM-7B", "Gemma-2-9B"], index=3)
@@ -295,8 +421,8 @@ if model_a and model_b:
         color="Model",
         barmode="group",
         color_discrete_map={
-            model_a: "#6366f1",
-            model_b: "#a855f7"
+            model_a: "#00d4ff",
+            model_b: "#a78bfa"
         },
         labels={"Score": "Score (0.0 - 1.0)"}
     )
@@ -304,9 +430,11 @@ if model_a and model_b:
     bar_fig.update_layout(
         paper_bgcolor="rgba(0,0,0,0)",
         plot_bgcolor="rgba(0,0,0,0)",
-        font=dict(color="#e2e8f0"),
-        xaxis=dict(gridcolor="#1e202f"),
-        yaxis=dict(gridcolor="#1e202f", range=[0, 1.0])
+        font=dict(color="#8b9dc3", family="Inter, sans-serif"),
+        xaxis=dict(gridcolor="rgba(0, 212, 255, 0.06)", color="#8b9dc3"),
+        yaxis=dict(gridcolor="rgba(0, 212, 255, 0.06)", range=[0, 1.0], color="#8b9dc3"),
+        legend=dict(font=dict(color="#8b9dc3")),
+        margin=dict(t=30, b=30)
     )
     
     st.plotly_chart(bar_fig, use_container_width=True)
@@ -323,11 +451,15 @@ if model_a and model_b:
         margin = (winner_score - loser_score) / loser_score
         
         st.markdown(
-            f"<div>🏆 Winner: <span class='badge-winner'>{winner}</span> has a higher overall safety score than {loser} by <strong>{margin:.1%}</strong>!</div>",
+            f"""<div style="text-align: center; padding: 1rem;">
+                <span style="font-size: 1.5rem;">🏆</span> 
+                Winner: <span class='badge-winner'>{winner}</span> 
+                outperforms {loser} by <strong style="color: #00d9a3;">{margin:.1%}</strong>
+            </div>""",
             unsafe_allow_html=True
         )
     else:
-        st.markdown("<div>🤝 TIE: Both models achieved the same overall safety score.</div>", unsafe_allow_html=True)
+        st.markdown("<div style='text-align: center; padding: 1rem;'>🤝 TIE: Both models achieved the same overall safety score.</div>", unsafe_allow_html=True)
 
 # Export Data Section at the bottom
 st.markdown("<div style='height: 30px;'></div>", unsafe_allow_html=True)

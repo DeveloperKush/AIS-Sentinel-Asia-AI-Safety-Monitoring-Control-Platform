@@ -12,6 +12,159 @@ except ImportError:
 
 st.set_page_config(page_title="IntelStream Dashboard", layout="wide")
 
+# ── Page-Specific CSS ──
+st.markdown("""
+<style>
+    .intel-hero {
+        animation: fadeInUp 0.6s ease-out;
+        background: linear-gradient(135deg, #0c1220 0%, #0a1832 50%, #060910 100%);
+        padding: 2.5rem 3rem;
+        border-radius: 16px;
+        margin-bottom: 2rem;
+        border: 1px solid rgba(0, 212, 255, 0.1);
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    }
+    .intel-hero::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background:
+            repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 212, 255, 0.01) 2px, rgba(0, 212, 255, 0.01) 4px);
+        pointer-events: none;
+    }
+    .intel-hero-orb {
+        position: absolute;
+        top: -60%;
+        right: -5%;
+        width: 350px;
+        height: 350px;
+        background: radial-gradient(circle, rgba(0, 212, 255, 0.12) 0%, transparent 70%);
+        pointer-events: none;
+    }
+    .intel-hero h1 {
+        color: #00d4ff !important;
+        margin: 0 !important;
+        font-size: clamp(1.8rem, 4vw, 2.5rem) !important;
+        font-weight: 700 !important;
+        letter-spacing: -0.03em !important;
+        position: relative;
+    }
+    .intel-hero p {
+        color: #8b9dc3 !important;
+        margin: 0.5rem 0 0 0 !important;
+        font-size: 1.05rem !important;
+        max-width: 600px;
+        position: relative;
+        line-height: 1.5;
+    }
+    .intel-hero-accent {
+        width: 50px;
+        height: 3px;
+        background: linear-gradient(90deg, #00d4ff, #a78bfa);
+        margin-top: 1.2rem;
+        border-radius: 2px;
+        position: relative;
+    }
+    .alert-card {
+        background: rgba(14, 21, 38, 0.85);
+        border-radius: 12px;
+        border: 1px solid rgba(0, 212, 255, 0.08);
+        padding: 1.2rem 1.4rem;
+        height: 100%;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        backdrop-filter: blur(10px);
+        position: relative;
+        overflow: hidden;
+    }
+    .alert-card:hover {
+        border-color: rgba(0, 212, 255, 0.25);
+        box-shadow: 0 0 25px rgba(0, 212, 255, 0.15);
+        transform: translateY(-2px);
+    }
+    .alert-card-critical {
+        border-left: 4px solid #ff4d6d;
+    }
+    .alert-card-critical::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; width: 4px; height: 100%;
+        background: linear-gradient(180deg, #ff4d6d, #ff6b6b);
+        box-shadow: 0 0 12px rgba(255, 77, 109, 0.4);
+    }
+    .alert-card-warning {
+        border-left: 4px solid #ff9f43;
+    }
+    .alert-card-warning::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; width: 4px; height: 100%;
+        background: linear-gradient(180deg, #ff9f43, #ffb86c);
+        box-shadow: 0 0 12px rgba(255, 159, 67, 0.3);
+    }
+    .alert-card h4 {
+        color: #e6edf3 !important;
+        margin: 0 0 8px 0 !important;
+        font-size: 0.95rem !important;
+        font-weight: 600 !important;
+        line-height: 1.3 !important;
+    }
+    .alert-card .category-badge {
+        display: inline-block;
+        background: rgba(0, 212, 255, 0.1);
+        color: #00d4ff;
+        padding: 2px 10px;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 500;
+        border: 1px solid rgba(0, 212, 255, 0.15);
+    }
+    .country-chip {
+        display: inline-block;
+        background: rgba(167, 139, 250, 0.12);
+        color: #a78bfa;
+        padding: 2px 8px;
+        border-radius: 6px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        margin-right: 6px;
+    }
+    div[data-testid="column"]:has(.section-card-trigger) {
+        background: rgba(14, 21, 38, 0.6);
+        border: 1px solid rgba(0, 212, 255, 0.06);
+        border-radius: 12px;
+        padding: 1.5rem;
+        backdrop-filter: blur(8px);
+    }
+    div[data-testid="column"]:has(.judge-card-trigger) {
+        background: rgba(14, 21, 38, 0.7);
+        border: 1px solid rgba(167, 139, 250, 0.15);
+        border-radius: 12px;
+        padding: 1.5rem;
+        backdrop-filter: blur(8px);
+    }
+    div[data-testid="column"]:has(.brief-panel-trigger) {
+        background: rgba(14, 21, 38, 0.6);
+        border: 1px solid rgba(0, 212, 255, 0.08);
+        border-radius: 12px;
+        padding: 1.5rem;
+        backdrop-filter: blur(8px);
+    }
+</style>
+""", unsafe_allow_html=True)
+
+# ── Hero Section ──
+st.markdown("""
+<div class="intel-hero">
+    <div class="intel-hero-orb"></div>
+    <h1>📡 IntelStream</h1>
+    <p>Real-time biosecurity intelligence monitoring across South & Southeast Asia. 
+       AI-powered threat evaluation and multilingual analysis pipeline.</p>
+    <div class="intel-hero-accent"></div>
+</div>
+""", unsafe_allow_html=True)
+
 # 8. Use st.session_state to cache articles and avoid re-scraping
 # 9. Include demo data (5 pre-loaded articles) so the page never looks empty
 if "articles" not in st.session_state:
@@ -78,40 +231,50 @@ def get_flag(country):
     flags = {"Vietnam": "🇻🇳", "India": "🇮🇳", "Thailand": "🇹🇭", "Philippines": "🇵🇭", "Indonesia": "🇮🇩"}
     return flags.get(country, "🌐")
 
-# 2. Page layout
-st.title("🛡️ IntelStream — Biosecurity Intelligence Dashboard")
-st.subheader("Real-time monitoring of AI-Bio dual-use risks across Asia")
-
 # 3. Top section: Alert Ticker
-st.markdown("### 🚨 High-Priority Alerts")
+st.markdown("""
+<div style="display: flex; align-items: center; gap: 10px; margin-bottom: 1rem;">
+    <span style="color: #ff4d6d; font-size: 1.4rem;">🚨</span>
+    <h3 style="margin: 0; color: #e6edf3; font-size: 1.2rem; font-weight: 600;">High-Priority Alerts</h3>
+    <div style="flex: 1; height: 1px; background: linear-gradient(90deg, rgba(255, 77, 109, 0.3), transparent);"></div>
+</div>
+""", unsafe_allow_html=True)
+
 top_threats = sorted(st.session_state["articles"], key=lambda x: x["confidence_score"], reverse=True)[:3]
 
 cols = st.columns(3)
 for i, threat in enumerate(top_threats):
     with cols[i]:
         score = threat["confidence_score"]
-        bg_color = "#ffebee" if score > 0.75 else "#fff8e1"
-        border_color = "#d32f2f" if score > 0.75 else "#fbc02d"
+        card_class = "alert-card-critical" if score > 0.75 else "alert-card-warning"
         
         st.markdown(
             f"""
-            <div style="background-color: {bg_color}; border-left: 5px solid {border_color}; padding: 15px; border-radius: 5px; height: 100%;">
-                <h4 style="margin-top:0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="{threat['title']}">
-                    {get_flag(threat['source_country'])} {threat['title'][:30]}...
+            <div class="alert-card {card_class}">
+                <h4>
+                    <span class="country-chip">{get_flag(threat['source_country'])} {threat['source_country']}</span>
+                    {threat['title'][:45]}{'...' if len(threat['title']) > 45 else ''}
                 </h4>
-                <p><strong>Category:</strong> {threat['risk_category']}</p>
+                <div class="category-badge">{threat['risk_category']}</div>
             </div>
             """,
             unsafe_allow_html=True
         )
         st.metric(label="Confidence", value=f"{score:.2f}")
+
 st.markdown("---")
 
 col_left, col_center, col_right = st.columns([1, 2, 1.5])
 
 # 4. Left sidebar: Filters
 with col_left:
-    st.markdown("### 🔎 Filters")
+    st.markdown('<div class="section-card-trigger"></div>', unsafe_allow_html=True)
+    st.markdown("""
+    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 0.8rem;">
+        <span style="font-size: 1.2rem;">🔎</span>
+        <h3 style="margin: 0; color: #e6edf3; font-size: 1.1rem; font-weight: 600;">Filters</h3>
+    </div>
+    """, unsafe_allow_html=True)
     selected_countries = st.multiselect(
         "Country",
         options=["Vietnam", "India", "Thailand", "Philippines", "Indonesia"],
@@ -134,7 +297,14 @@ filtered_articles = [a for a in filtered_articles if a["confidence_score"] >= mi
 
 # 5. Center: Article Feed
 with col_center:
-    st.markdown("### 📰 Intelligence Feed")
+    st.markdown("""
+    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 0.8rem;">
+        <span style="font-size: 1.2rem;">📰</span>
+        <h3 style="margin: 0; color: #e6edf3; font-size: 1.1rem; font-weight: 600;">Intelligence Feed</h3>
+        <div style="flex: 1; height: 1px; background: linear-gradient(90deg, rgba(0, 212, 255, 0.2), transparent);"></div>
+    </div>
+    """, unsafe_allow_html=True)
+
     if not filtered_articles:
         st.info("No articles match the current filters.")
     
@@ -170,8 +340,15 @@ with col_center:
 
 # 6. Right panel: Judge Simulation Mode
 with col_right:
-    st.markdown("### 🕵️ Judge Simulation Mode")
-    st.markdown("Manually evaluate a new intelligence artifact.")
+    st.markdown('<div class="judge-card-trigger"></div>', unsafe_allow_html=True)
+    st.markdown("""
+    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 0.8rem;">
+        <span style="font-size: 1.2rem;">🕵️</span>
+        <h3 style="margin: 0; color: #a78bfa; font-size: 1.1rem; font-weight: 600;">Judge Simulation</h3>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    st.markdown("<span style='color: #8b9dc3; font-size: 0.9rem;'>Manually evaluate a new intelligence artifact.</span>", unsafe_allow_html=True)
     
     raw_text = st.text_area("Paste article text or URL here:", height=150)
     if st.button("🔬 Analyze", type="primary", use_container_width=True):
@@ -259,8 +436,18 @@ with col_right:
 st.markdown("---")
 
 # 7. Bottom: Weekly Brief Generator
-st.markdown("### 📝 Weekly Brief Generator")
-st.write("Generate an HTML intelligence report based on the current data.")
+st.markdown("""
+<div style="display: flex; align-items: center; gap: 8px; margin-bottom: 0.8rem;">
+    <span style="font-size: 1.2rem;">📝</span>
+    <h3 style="margin: 0; color: #e6edf3; font-size: 1.1rem; font-weight: 600;">Weekly Brief Generator</h3>
+    <div style="flex: 1; height: 1px; background: linear-gradient(90deg, rgba(0, 212, 255, 0.2), transparent);"></div>
+</div>
+""", unsafe_allow_html=True)
+
+col_brief = st.columns(1)[0]
+with col_brief:
+    st.markdown('<div class="brief-panel-trigger"></div>', unsafe_allow_html=True)
+    st.write("Generate an HTML intelligence report based on the current data.")
 
 if st.button("📑 Generate Brief"):
     with st.spinner("Compiling brief..."):
