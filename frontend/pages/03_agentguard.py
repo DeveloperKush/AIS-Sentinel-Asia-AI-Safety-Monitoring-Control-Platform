@@ -65,7 +65,7 @@ def render_slide(steps, step_index):
     from modules.agentguard.environment import SlideEnvironment
     
     # Initialize slide environment with the correct aspect ratio
-    slide = SlideEnvironment(width=1200, height=800)
+    slide = SlideEnvironment(width=800, height=600)
     
     current_steps = steps[:step_index + 1]
     
