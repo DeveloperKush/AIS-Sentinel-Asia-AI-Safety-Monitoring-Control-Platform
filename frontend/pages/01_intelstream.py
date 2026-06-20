@@ -235,6 +235,7 @@ with col_right:
                     except Exception as e:
                         # Fallback if API calls fail
                         st.markdown("#### Results")
+                        st.error(f"❌ Deployed API Error: {e}")
                         st.markdown(f"**Translation (Fallback):**\n\n> {raw_text}")
                         st.markdown("**Threat Assessment:**")
                         st.error(f"🚨 HIGH RISK DETECTED (0.88)\n\nCategory: Dual-Use Tech\nJustification: Content describes accessible methods for pathogen modification (API Error: {e}).")
