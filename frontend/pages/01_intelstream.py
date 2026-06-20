@@ -159,7 +159,7 @@ with col_center:
             if st.session_state.get(f"show_policy_{article['id']}", False):
                 try:
                     mapper = RegulatoryMapper()
-                    mapping = mapper.map_threat(article['risk_category'], [article['source_country']])
+                    mapping = mapper.map_threat(article['risk_category'], article['source_country'])
                     if mapping:
                         for item in mapping:
                             st.info(f"**{item['jurisdiction']} ({item['law_name']}):** {item['relevance_summary']}")
@@ -208,7 +208,7 @@ with col_right:
                         
                         # 3. Policy mapping
                         risk_category = eval_result.get("risk_category", "None")
-                        mapping = mapper.map_threat(risk_category, ["Vietnam", "India", "EU", "Singapore", "Indonesia", "ASEAN"])
+                        mapping = mapper.map_threat(risk_category)
 
                         st.markdown("#### Results")
                         st.markdown(f"**Detected Language:** `{detected_lang.upper()}`")
