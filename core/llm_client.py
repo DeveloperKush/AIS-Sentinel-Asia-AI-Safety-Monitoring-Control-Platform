@@ -2,6 +2,9 @@ import os
 import time
 import logging
 from typing import Any, Dict, Optional
+from dotenv import load_dotenv
+
+load_dotenv()
 
 logger = logging.getLogger(__name__)
 
@@ -16,9 +19,11 @@ except ModuleNotFoundError as exc:
 
 GEMINI_API_KEY: str = os.environ.get("GEMINI_API_KEY", "")
 if not GEMINI_API_KEY:
+    GEMINI_API_KEY = os.environ.get("GOOGLE_API_KEY", "")
+if not GEMINI_API_KEY:
     logger.warning("GEMINI_API_KEY environment variable is not set.")
 
-if genai is not None:
+if genai is not None and GEMINI_API_KEY:
     genai.configure(api_key=GEMINI_API_KEY)
 
 
@@ -35,6 +40,11 @@ class GeminiClient:
             model_name: Gemini model name to use for generations.
         """
         self.model_name: str = model_name
+        api_key = os.environ.get("GEMINI_API_KEY", "")
+        if not api_key:
+            api_key = os.environ.get("GOOGLE_API_KEY", "")
+        if genai is not None and api_key:
+            genai.configure(api_key=api_key)
 
     def _get_model(self, schema: Optional[Dict[str, Any]] = None):
         """
