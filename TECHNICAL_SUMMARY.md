@@ -30,19 +30,19 @@ AIS-Sentinel follows a modular four-layer architecture backed by a shared SQLite
 
 ```
 ┌─────────────────────────────────────────────────────┐
-│                  Streamlit Frontend                  │
-│   IntelStream │ SafetyBench │ AgentGuard │ PolicyMap │
+│                  Streamlit Frontend                 │
+│   IntelStream │ SafetyBench │ AgentGuard │ PolicyMap│
 ├─────────────────────────────────────────────────────┤
-│               Module Layer (4 Modules)               │
-│  ┌───────────┐ ┌───────────┐ ┌──────────┐ ┌───────┐│
-│  │IntelStream│ │SafetyBench│ │AgentGuard│ │Policy ││
-│  │ Scraper   │ │ Runner    │ │ Agent +  │ │Bridge ││
-│  │ Evaluator │ │ Metrics   │ │ Monitor  │ │Mapper ││
-│  │ Brief Gen │ │Leaderboard│ │ Environ. │ │Report ││
-│  └───────────┘ └───────────┘ └──────────┘ └───────┘│
+│               Module Layer (4 Modules)              │
+│  ┌───────────┐ ┌───────────┐ ┌──────────┐ ┌───────┐ │
+│  │IntelStream│ │SafetyBench│ │AgentGuard│ │Policy │ │
+│  │ Scraper   │ │ Runner    │ │ Agent +  │ │Bridge │ │
+│  │ Evaluator │ │ Metrics   │ │ Monitor  │ │Mapper │ │
+│  │ Brief Gen │ │Leaderboard│ │ Environ. │ │Report │ │
+│  └───────────┘ └───────────┘ └──────────┘ └───────┘ │
 ├─────────────────────────────────────────────────────┤
-│         Core: LLM Client │ Translator │ Database     │
-│         (Gemini Flash)   │ (5 langs)  │ (SQLite)     │
+│         Core: LLM Client │ Translator │ Database    │
+│         (Gemini Flash)   │ (5 langs)  │ (SQLite)    │
 └─────────────────────────────────────────────────────┘
 ```
 
