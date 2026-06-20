@@ -25,6 +25,9 @@ st.set_page_config = lambda *args, **kwargs: None
 # Premium Sidebar Dark Styling
 st.markdown("""
     <style>
+        [data-testid="stSidebarNav"] {
+            display: none !important;
+        }
         [data-testid="stSidebar"] {
             background-color: #0b0c10;
             color: #c5c6c7;
