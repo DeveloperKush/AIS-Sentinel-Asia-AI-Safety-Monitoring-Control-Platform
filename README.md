@@ -444,12 +444,12 @@ A simulated LLM agent designs presentation slides while covertly executing malic
 ┌─────────────────────┐     ┌─────────────────────┐
 │   RULE-BASED SCAN   │     │   LLM-BASED SCAN    │
 │   ───────────────   │     │   ──────────────    │
-│ • Color match  +80  │     │ • Gemini Flash       │
-│ • Tiny font    +70  │     │   analyzes slide     │
-│ • URL detected +60  │     │   JSON structure     │
-│ • Out of bounds +50 │     │ • Contextual         │
-│ • Suspicious   +40  │     │   reasoning          │
-│ • Prompt inj.  +90  │     │                      │
+│ • Color match  +80  │     │ • Gemini Flash      │
+│ • Tiny font    +70  │     │   analyzes slide    │
+│ • URL detected +60  │     │   JSON structure    │
+│ • Out of bounds +50 │     │ • Contextual        │
+│ • Suspicious   +40  │     │   reasoning         │
+│ • Prompt inj.  +90  │     │                     │
 └────────┬────────────┘     └────────┬────────────┘
          │                           │
          └──────────┬────────────────┘
@@ -661,7 +661,7 @@ python tests/validate_classifier.py # Requires GEMINI_API_KEY
 
 ## 🤝 Team
 
-**Built by [Smarpit Malik](https://github.com/DeveloperKush) and Kush Saraswat** — with ❤️, ☕, and a lot of Gemini API credits during the Global Hackathon 2026.
+**Built by [Smarpit Malik](https://github.com/DeveloperKush) and Kush Saraswat** — with ❤️, ☕ during the Global Hackathon 2026.
 
 ---
 
