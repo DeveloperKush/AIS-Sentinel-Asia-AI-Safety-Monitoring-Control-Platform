@@ -177,13 +177,78 @@ with col_right:
     if st.button("🔬 Analyze", type="primary", use_container_width=True):
         if raw_text:
             with st.spinner("Analyzing threat and mapping policies..."):
-                time.sleep(2)
-                st.markdown("#### Results")
-                st.markdown("**Translation:** Extracted and translated key segments to English.")
-                st.markdown("**Threat Assessment:**")
-                st.error("🚨 HIGH RISK DETECTED (0.88)\n\nCategory: Dual-Use Tech\nJustification: Content describes accessible methods for pathogen modification.")
-                st.markdown("**Policy Mapping:**")
-                st.warning("⚖️ **EU AI Act:** Potential violation of Article 5 (Prohibited AI practices).\n⚖️ **ASEAN Framework:** Flags under cross-border biological threat sharing protocol.")
+                try:
+                    from core.translator import SmartTranslator
+                    from modules.intelstream.evaluator import ThreatEvaluator
+                    from modules.policybridge.mapper import RegulatoryMapper
+                    import os
+
+                    api_key = os.environ.get("GEMINI_API_KEY", "")
+                    use_real = bool(api_key)
+                except Exception:
+                    use_real = False
+
+                if use_real:
+                    try:
+                        translator = SmartTranslator()
+                        evaluator = ThreatEvaluator()
+                        mapper = RegulatoryMapper()
+
+                        # 1. Detect language and translate
+                        detected_lang = translator.detect_language(raw_text)
+                        translation_result = translator.translate_article(
+                            title="User Input",
+                            text=raw_text,
+                            source_lang=detected_lang
+                        )
+                        translated_text = translation_result["text_en"]
+
+                        # 2. Evaluate threat
+                        eval_result = evaluator.evaluate(translated_text, "User Input")
+                        
+                        # 3. Policy mapping
+                        risk_category = eval_result.get("risk_category", "None")
+                        mapping = mapper.map_threat(risk_category, ["Vietnam", "India", "EU", "Singapore", "Indonesia", "ASEAN"])
+
+                        st.markdown("#### Results")
+                        st.markdown(f"**Detected Language:** `{detected_lang.upper()}`")
+                        st.markdown(f"**Translation (English):**\n\n> {translated_text}")
+                        
+                        st.markdown("**Threat Assessment:**")
+                        score = eval_result.get("confidence_score", 0.0)
+                        detected = eval_result.get("threat_detected", False)
+                        severity = eval_result.get("severity", "low")
+                        justification = eval_result.get("justification", "")
+                        
+                        if detected:
+                            st.error(f"🚨 {severity.upper()} RISK DETECTED ({score:.2f})\n\n**Category:** {risk_category}\n\n**Justification:** {justification}")
+                        else:
+                            st.success(f"✅ SAFE / LOW RISK ({score:.2f})\n\n**Justification:** {justification}")
+                        
+                        st.markdown("**Policy Mapping:**")
+                        if mapping:
+                            for item in mapping:
+                                st.warning(f"⚖️ **{item['jurisdiction']} ({item['law_name']}):** {item['relevance_summary']}")
+                        else:
+                            st.info("No specific policy mapping found for this risk category.")
+
+                    except Exception as e:
+                        # Fallback if API calls fail
+                        st.markdown("#### Results")
+                        st.markdown(f"**Translation (Fallback):**\n\n> {raw_text}")
+                        st.markdown("**Threat Assessment:**")
+                        st.error(f"🚨 HIGH RISK DETECTED (0.88)\n\nCategory: Dual-Use Tech\nJustification: Content describes accessible methods for pathogen modification (API Error: {e}).")
+                        st.markdown("**Policy Mapping:**")
+                        st.warning("⚖️ **EU AI Act:** Potential violation of Article 5 (Prohibited AI practices).\n⚖️ **ASEAN Framework:** Flags under cross-border biological threat sharing protocol.")
+                else:
+                    # No API key, show mock results
+                    time.sleep(2)
+                    st.markdown("#### Results")
+                    st.markdown(f"**Translation (Mock):**\n\n> New AI technology helps design viral proteins faster")
+                    st.markdown("**Threat Assessment:**")
+                    st.error("🚨 HIGH RISK DETECTED (0.88)\n\nCategory: Dual-Use Tech\nJustification: Content describes accessible methods for pathogen modification.")
+                    st.markdown("**Policy Mapping:**")
+                    st.warning("⚖️ **EU AI Act:** Potential violation of Article 5 (Prohibited AI practices).\n⚖️ **ASEAN Framework:** Flags under cross-border biological threat sharing protocol.")
         else:
             st.warning("Please paste text to analyze.")
 
