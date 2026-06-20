@@ -661,7 +661,7 @@ python tests/validate_classifier.py # Requires GEMINI_API_KEY
 
 ## 🤝 Team
 
-**Built by [Smarpit Malik](https://github.com/DeveloperKush) and Kush Saraswat** — with ❤️, ☕ during the Global Hackathon 2026.
+**Built by [Smarpit Malik](https://github.com/smarpitm) and [Kush Saraswat](https://github.com/DeveloperKush)** — with ❤️, ☕ during the Global Hackathon 2026.
 
 ---
 
