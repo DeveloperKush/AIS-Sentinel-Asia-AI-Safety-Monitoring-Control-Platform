@@ -25,11 +25,15 @@ st.set_page_config = lambda *args, **kwargs: None
 # ╔══════════════════════════════════════════════════════════════════════╗
 # ║                    GLOBAL CSS — MISSION CONTROL THEME               ║
 # ╚══════════════════════════════════════════════════════════════════════╝
-st.markdown("""
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+if "dark_mode" not in st.session_state:
+    st.session_state["dark_mode"] = True
 
-    /* ── CSS Custom Properties ── */
+# Sync state from widget key if it exists in session state (inverted)
+if "theme_toggle" in st.session_state:
+    st.session_state["dark_mode"] = not st.session_state["theme_toggle"]
+
+if st.session_state["dark_mode"]:
+    theme_variables = """
     :root {
         --bg-primary: #060910;
         --bg-secondary: #0c1220;
@@ -60,55 +64,120 @@ st.markdown("""
         --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         --font-heading: 'Space Grotesk', sans-serif;
         --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+        /* Theme Specific Colors */
+        --bg-app: linear-gradient(160deg, #060910 0%, #0a0f1c 30%, #0c1428 60%, #080d18 100%);
+        --bg-sidebar: linear-gradient(180deg, #070b14 0%, #0a1020 50%, #060910 100%);
+        --bg-hero: linear-gradient(135deg, #0c1220 0%, #0a1832 50%, #060910 100%);
+        --bg-listbox: #0c1220;
+        --bg-option: #0c1220;
+        --bg-input: rgba(14, 21, 38, 0.8);
+        --text-sidebar: #8b9dc3;
+        --bg-primary-btn: linear-gradient(135deg, #00d4ff 0%, #0098b3 100%);
+        --text-primary-btn: #060910;
+        --glow-primary-btn: rgba(0, 212, 255, 0.5);
     }
+    """
+else:
+    theme_variables = """
+    :root {
+        --bg-primary: #f4f6fa;
+        --bg-secondary: #ffffff;
+        --bg-card: rgba(255, 255, 255, 0.95);
+        --bg-glass: rgba(255, 255, 255, 0.75);
+        --accent-primary: #0066cc; /* High contrast royal blue */
+        --accent-secondary: #dc2626; /* High contrast red */
+        --accent-tertiary: #6d28d9; /* Rich violet */
+        --accent-glow: rgba(0, 102, 204, 0.12);
+        --accent-glow-strong: rgba(0, 102, 204, 0.25);
+        --text-primary: #1a202c; /* Slate black for maximum visibility */
+        --text-secondary: #2d3748; /* Dark grey */
+        --text-muted: #5a6578; /* Legible mid grey */
+        --border-subtle: rgba(0, 102, 204, 0.12);
+        --border-accent: rgba(0, 102, 204, 0.25);
+        --success: #00875a; /* Forest green */
+        --warning: #b76e00; /* Darker amber */
+        --danger: #dc2626; /* Crimson red */
+        --radius-sm: 8px;
+        --radius-md: 12px;
+        --radius-lg: 16px;
+        --radius-xl: 20px;
+        --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+        --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.08);
+        --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.12);
+        --shadow-glow: 0 0 25px var(--accent-glow);
+        --shadow-glow-strong: 0 0 40px var(--accent-glow-strong);
+        --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        --font-heading: 'Space Grotesk', sans-serif;
+        --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+        /* Theme Specific Colors */
+        --bg-app: linear-gradient(160deg, #f4f6fa 0%, #eef2f7 30%, #e2e8f0 60%, #f4f6fa 100%);
+        --bg-sidebar: linear-gradient(180deg, #eef2f7 0%, #e2e8f0 100%);
+        --bg-hero: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 50%, #eef2f7 100%);
+        --bg-listbox: #ffffff;
+        --bg-option: #ffffff;
+        --bg-input: rgba(255, 255, 255, 0.95);
+        --text-sidebar: #2d3748;
+        --bg-primary-btn: linear-gradient(135deg, #0066cc 0%, #004499 100%);
+        --text-primary-btn: #ffffff;
+        --glow-primary-btn: rgba(0, 102, 204, 0.3);
+    }
+    """
+
+st.markdown(f"""
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+    {theme_variables}
 
     /* ── Keyframe Animations ── */
-    @keyframes fadeInUp {
-        from { opacity: 0; transform: translateY(24px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-    }
-    @keyframes pulseGlow {
-        0%, 100% { box-shadow: 0 0 15px var(--accent-glow); }
-        50% { box-shadow: 0 0 30px var(--accent-glow-strong); }
-    }
-    @keyframes shimmer {
-        0% { background-position: -200% center; }
-        100% { background-position: 200% center; }
-    }
-    @keyframes scanline {
-        0% { transform: translateY(-100%); }
-        100% { transform: translateY(100vh); }
-    }
-    @keyframes borderGlow {
-        0%, 100% { border-color: rgba(0, 212, 255, 0.1); }
-        50% { border-color: rgba(0, 212, 255, 0.3); }
-    }
-    @keyframes slideInLeft {
-        from { opacity: 0; transform: translateX(-20px); }
-        to { opacity: 1; transform: translateX(0); }
-    }
+    @keyframes fadeInUp {{
+        from {{ opacity: 0; transform: translateY(24px); }}
+        to {{ opacity: 1; transform: translateY(0); }}
+    }}
+    @keyframes fadeIn {{
+        from {{ opacity: 0; }}
+        to {{ opacity: 1; }}
+    }}
+    @keyframes pulseGlow {{
+        0%, 100% {{ box-shadow: 0 0 15px var(--accent-glow); }}
+        50% {{ box-shadow: 0 0 30px var(--accent-glow-strong); }}
+    }}
+    @keyframes shimmer {{
+        0% {{ background-position: -200% center; }}
+        100% {{ background-position: 200% center; }}
+    }}
+    @keyframes scanline {{
+        0% {{ transform: translateY(-100%); }}
+        100% {{ transform: translateY(100vh); }}
+    }}
+    @keyframes borderGlow {{
+        0%, 100% {{ border-color: rgba(0, 212, 255, 0.1); }}
+        50% {{ border-color: rgba(0, 212, 255, 0.3); }}
+    }}
+    @keyframes slideInLeft {{
+        from {{ opacity: 0; transform: translateX(-20px); }}
+        to {{ opacity: 1; transform: translateX(0); }}
+    }}
 
     /* ── Global App Background ── */
-    .stApp {
-        background: linear-gradient(160deg, #060910 0%, #0a0f1c 30%, #0c1428 60%, #080d18 100%) !important;
+    .stApp {{
+        background: var(--bg-app) !important;
         color: var(--text-primary) !important;
         font-family: var(--font-body) !important;
-    }
+    }}
 
     /* ── Widen Content Layout ── */
     [data-testid="block-container"],
-    .block-container {
+    .block-container {{
         max-width: 95% !important;
         padding-left: 2.5rem !important;
         padding-right: 2.5rem !important;
         padding-top: 2rem !important;
         padding-bottom: 2rem !important;
-    }
-    .stApp::before {
+    }}
+    .stApp::before {{
         content: '';
         position: fixed;
         top: 0; left: 0; right: 0; bottom: 0;
@@ -118,45 +187,45 @@ st.markdown("""
             radial-gradient(ellipse at 50% 80%, rgba(255, 107, 107, 0.02) 0%, transparent 50%);
         pointer-events: none;
         z-index: 0;
-    }
+    }}
 
     /* ── Custom Scrollbar ── */
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: var(--bg-primary); }
-    ::-webkit-scrollbar-thumb {
+    ::-webkit-scrollbar {{ width: 6px; height: 6px; }}
+    ::-webkit-scrollbar-track {{ background: var(--bg-primary); }}
+    ::-webkit-scrollbar-thumb {{
         background: linear-gradient(180deg, var(--accent-primary), var(--accent-tertiary));
         border-radius: 3px;
-    }
-    ::-webkit-scrollbar-thumb:hover { background: var(--accent-primary); }
+    }}
+    ::-webkit-scrollbar-thumb:hover {{ background: var(--accent-primary); }}
 
     /* ── Headings & Text ── */
-    .stApp h1, .stApp h2, .stApp h3, .stApp h4 {
+    .stApp h1, .stApp h2, .stApp h3, .stApp h4 {{
         font-family: var(--font-heading) !important;
         color: var(--text-primary) !important;
         letter-spacing: -0.02em !important;
-    }
-    .stApp h1 { font-weight: 700 !important; }
-    .stApp h2 { font-weight: 600 !important; }
-    .stApp h3 { font-weight: 600 !important; color: var(--text-secondary) !important; }
-    .stApp p {
+    }}
+    .stApp h1 {{ font-weight: 700 !important; }}
+    .stApp h2 {{ font-weight: 600 !important; }}
+    .stApp h3 {{ font-weight: 600 !important; color: var(--text-secondary) !important; }}
+    .stApp p {{
         font-family: var(--font-body);
-    }
-    .stMarkdown { color: var(--text-primary); }
+    }}
+    .stMarkdown {{ color: var(--text-primary); }}
 
     /* ── Widget Labels (Visibility Fix) ── */
     label[data-testid="stWidgetLabel"],
     label[data-testid="stWidgetLabel"] p,
-    .stWidgetLabel p {
+    .stWidgetLabel p {{
         color: var(--text-secondary) !important;
         font-family: var(--font-heading) !important;
         font-weight: 500 !important;
-    }
+    }}
 
     /* ── Buttons ── */
-    .stButton > button {
-        background: linear-gradient(135deg, rgba(0, 212, 255, 0.15) 0%, rgba(0, 212, 255, 0.05) 100%) !important;
+    .stButton > button {{
+        background: linear-gradient(135deg, var(--accent-glow) 0%, transparent 100%) !important;
         color: var(--accent-primary) !important;
-        border: 1px solid rgba(0, 212, 255, 0.3) !important;
+        border: 1px solid var(--border-accent) !important;
         border-radius: var(--radius-sm) !important;
         font-family: var(--font-heading) !important;
         font-weight: 600 !important;
@@ -164,274 +233,274 @@ st.markdown("""
         padding: 0.5rem 1.5rem !important;
         transition: var(--transition) !important;
         backdrop-filter: blur(10px) !important;
-    }
-    .stButton > button:hover {
-        background: linear-gradient(135deg, rgba(0, 212, 255, 0.25) 0%, rgba(0, 212, 255, 0.1) 100%) !important;
+    }}
+    .stButton > button:hover {{
+        background: linear-gradient(135deg, var(--accent-glow-strong) 0%, var(--accent-glow) 100%) !important;
         border-color: var(--accent-primary) !important;
         box-shadow: var(--shadow-glow) !important;
         transform: translateY(-1px) !important;
-    }
-    .stButton > button:active {
+    }}
+    .stButton > button:active {{
         transform: translateY(0px) !important;
-    }
+    }}
     /* Primary button overrides */
     .stButton > button[kind="primary"],
-    .stButton > button[data-testid="stBaseButton-primary"] {
-        background: linear-gradient(135deg, #00d4ff 0%, #0098b3 100%) !important;
-        color: #060910 !important;
+    .stButton > button[data-testid="stBaseButton-primary"] {{
+        background: var(--bg-primary-btn) !important;
+        color: var(--text-primary-btn) !important;
         border: none !important;
         font-weight: 700 !important;
-    }
+    }}
     .stButton > button[kind="primary"]:hover,
-    .stButton > button[data-testid="stBaseButton-primary"]:hover {
-        box-shadow: 0 0 30px rgba(0, 212, 255, 0.5) !important;
-    }
+    .stButton > button[data-testid="stBaseButton-primary"]:hover {{
+        box-shadow: 0 0 30px var(--glow-primary-btn) !important;
+    }}
 
     /* ── Download Button ── */
-    .stDownloadButton > button {
-        background: rgba(0, 212, 255, 0.08) !important;
+    .stDownloadButton > button {{
+        background: var(--accent-glow) !important;
         color: var(--accent-primary) !important;
-        border: 1px solid rgba(0, 212, 255, 0.2) !important;
+        border: 1px solid var(--border-accent) !important;
         border-radius: var(--radius-sm) !important;
         font-family: var(--font-heading) !important;
         font-weight: 500 !important;
         transition: var(--transition) !important;
-    }
-    .stDownloadButton > button:hover {
-        background: rgba(0, 212, 255, 0.15) !important;
+    }}
+    .stDownloadButton > button:hover {{
+        background: var(--accent-glow-strong) !important;
         box-shadow: var(--shadow-glow) !important;
-    }
+    }}
 
     /* ── Metric Cards ── */
     [data-testid="stMetric"],
     [data-testid="stMetricValue"],
-    div[data-testid="stMetric"] {
+    div[data-testid="stMetric"] {{
         background: var(--bg-card) !important;
         border: 1px solid var(--border-subtle) !important;
         border-radius: var(--radius-md) !important;
         padding: 1rem !important;
         backdrop-filter: blur(12px) !important;
         transition: var(--transition) !important;
-    }
-    [data-testid="stMetric"]:hover {
+    }}
+    [data-testid="stMetric"]:hover {{
         border-color: var(--border-accent) !important;
         box-shadow: var(--shadow-glow) !important;
-    }
+    }}
     [data-testid="stMetric"] label,
-    [data-testid="stMetricLabel"] {
+    [data-testid="stMetricLabel"] {{
         color: var(--text-secondary) !important;
         font-family: var(--font-heading) !important;
         text-transform: uppercase !important;
         font-size: 0.75rem !important;
         letter-spacing: 0.08em !important;
-    }
-    [data-testid="stMetricValue"] {
+    }}
+    [data-testid="stMetricValue"] {{
         color: var(--accent-primary) !important;
         font-family: var(--font-heading) !important;
         font-weight: 700 !important;
-    }
+    }}
 
     /* ── DataFrames ── */
-    .stDataFrame, [data-testid="stDataFrame"] {
+    .stDataFrame, [data-testid="stDataFrame"] {{
         background: var(--bg-card) !important;
         border-radius: var(--radius-md) !important;
         border: 1px solid var(--border-subtle) !important;
         overflow: hidden !important;
-    }
+    }}
 
     /* ── Expanders ── */
-    [data-testid="stExpander"] {
+    [data-testid="stExpander"] {{
         background: var(--bg-card) !important;
         border: 1px solid var(--border-subtle) !important;
         border-radius: var(--radius-md) !important;
         margin-bottom: 0.5rem !important;
         transition: var(--transition) !important;
-    }
-    [data-testid="stExpander"]:hover {
+    }}
+    [data-testid="stExpander"]:hover {{
         border-color: var(--border-accent) !important;
-    }
+    }}
     [data-testid="stExpander"] summary,
-    .streamlit-expanderHeader {
+    .streamlit-expanderHeader {{
         background: transparent !important;
         color: var(--text-primary) !important;
         font-family: var(--font-heading) !important;
         font-weight: 500 !important;
-    }
+    }}
     .streamlit-expanderContent,
-    [data-testid="stExpander"] > div:last-child {
-        background: rgba(6, 9, 16, 0.5) !important;
+    [data-testid="stExpander"] > div:last-child {{
+        background: var(--bg-secondary) !important;
         border-top: 1px solid var(--border-subtle) !important;
         border-left: 3px solid var(--accent-primary) !important;
-    }
+    }}
 
     /* ── Inputs ── */
     .stTextInput > div > div > input,
-    .stTextArea > div > div > textarea {
-        background: rgba(14, 21, 38, 0.8) !important;
+    .stTextArea > div > div > textarea {{
+        background: var(--bg-input) !important;
         color: var(--text-primary) !important;
         border: 1px solid var(--border-subtle) !important;
         border-radius: var(--radius-sm) !important;
         font-family: var(--font-body) !important;
         transition: var(--transition) !important;
-    }
+    }}
     .stTextInput > div > div > input:focus,
-    .stTextArea > div > div > textarea:focus {
+    .stTextArea > div > div > textarea:focus {{
         border-color: var(--accent-primary) !important;
         box-shadow: 0 0 0 3px var(--accent-glow), inset 0 0 20px rgba(0, 212, 255, 0.05) !important;
-    }
+    }}
 
     /* ── Selectboxes & Multiselects ── */
     div[data-baseweb="select"],
-    div[data-baseweb="select"] > div {
-        background: rgba(14, 21, 38, 0.8) !important;
-        background-color: rgba(14, 21, 38, 0.8) !important;
+    div[data-baseweb="select"] > div {{
+        background: var(--bg-input) !important;
+        background-color: var(--bg-input) !important;
         border: 1px solid var(--border-subtle) !important;
         border-radius: var(--radius-sm) !important;
         transition: var(--transition) !important;
-    }
+    }}
     div[data-baseweb="select"]:hover,
-    div[data-baseweb="select"] > div:hover {
+    div[data-baseweb="select"] > div:hover {{
         border-color: var(--border-accent) !important;
-    }
-    div[data-baseweb="select"] * {
+    }}
+    div[data-baseweb="select"] * {{
         color: var(--text-primary) !important;
-    }
+    }}
     /* Selectbox dropdown list items and containers */
     div[role="listbox"],
     div[role="listbox"] ul,
     [data-baseweb="popover"],
-    [data-baseweb="menu"] {
-        background-color: #0c1220 !important;
-        background: #0c1220 !important;
+    [data-baseweb="menu"] {{
+        background-color: var(--bg-listbox) !important;
+        background: var(--bg-listbox) !important;
         border: 1px solid var(--border-accent) !important;
-    }
+    }}
     
     div[role="listbox"] [role="option"],
     div[role="option"],
-    li[role="option"] {
-        background-color: #0c1220 !important;
+    li[role="option"] {{
+        background-color: var(--bg-option) !important;
         color: var(--text-primary) !important;
-    }
+    }}
     
     div[role="listbox"] [role="option"]:hover,
     div[role="option"]:hover,
     li[role="option"]:hover,
-    [role="option"][aria-selected="true"] {
-        background-color: rgba(0, 212, 255, 0.15) !important;
+    [role="option"][aria-selected="true"] {{
+        background-color: var(--accent-glow) !important;
         color: var(--accent-primary) !important;
-    }
+    }}
 
     /* ── Radio Buttons ── */
-    .stRadio > div {
+    .stRadio > div {{
         background: transparent !important;
-    }
+    }}
     .stRadio > div label,
     .stRadio > div label p,
-    .stRadio > div label span {
+    .stRadio > div label span {{
         color: var(--text-primary) !important;
         transition: var(--transition) !important;
-    }
+    }}
 
     /* ── Sliders ── */
-    .stSlider > div > div > div > div {
+    .stSlider > div > div > div > div {{
         background: var(--accent-primary) !important;
-    }
+    }}
     .stSlider [data-testid="stTickBar"] div,
-    .stSlider [data-testid="stTickBar"] span {
+    .stSlider [data-testid="stTickBar"] span {{
         color: var(--text-secondary) !important;
-    }
+    }}
 
     /* ── Progress Bar ── */
-    .stProgress > div > div > div {
+    .stProgress > div > div > div {{
         background: linear-gradient(90deg, var(--accent-primary), var(--accent-tertiary)) !important;
         border-radius: 4px !important;
-    }
-    .stProgress > div > div {
-        background: rgba(14, 21, 38, 0.8) !important;
+    }}
+    .stProgress > div > div {{
+        background: var(--bg-input) !important;
         border-radius: 4px !important;
-    }
+    }}
 
     /* ── Alerts ── */
-    .stAlert, [data-testid="stAlert"] {
+    .stAlert, [data-testid="stAlert"] {{
         background: var(--bg-card) !important;
         border-radius: var(--radius-md) !important;
         border: 1px solid var(--border-subtle) !important;
         backdrop-filter: blur(10px) !important;
-    }
+    }}
     /* Info */
-    div[data-testid="stAlert"][data-baseweb*="notification"] {
-        background: rgba(0, 212, 255, 0.06) !important;
+    div[data-testid="stAlert"][data-baseweb*="notification"] {{
+        background: var(--accent-glow) !important;
         border-left: 3px solid var(--accent-primary) !important;
-    }
+    }}
 
     /* ── Tabs ── */
-    .stTabs [data-baseweb="tab-list"] {
+    .stTabs [data-baseweb="tab-list"] {{
         background: transparent !important;
         gap: 4px;
-    }
-    .stTabs [data-baseweb="tab"] {
+    }}
+    .stTabs [data-baseweb="tab"] {{
         background: transparent !important;
         color: var(--text-secondary) !important;
         border-radius: var(--radius-sm) !important;
         transition: var(--transition) !important;
-    }
-    .stTabs [aria-selected="true"] {
-        background: rgba(0, 212, 255, 0.1) !important;
+    }}
+    .stTabs [aria-selected="true"] {{
+        background: var(--accent-glow) !important;
         color: var(--accent-primary) !important;
         border-bottom: 2px solid var(--accent-primary) !important;
-    }
+    }}
 
     /* ── Dividers ── */
-    hr {
+    hr {{
         border: none !important;
         height: 1px !important;
         background: linear-gradient(90deg, transparent, var(--border-accent), transparent) !important;
         margin: 1.5rem 0 !important;
-    }
+    }}
 
     /* ── Captions ── */
-    .stCaption, [data-testid="stCaptionContainer"] {
+    .stCaption, [data-testid="stCaptionContainer"] {{
         color: var(--text-muted) !important;
         font-size: 0.8rem !important;
         font-style: italic !important;
-    }
+    }}
 
     /* ── Checkboxes ── */
     [data-testid="stCheckbox"] p,
     .stCheckbox label p,
-    .stCheckbox label span {
+    .stCheckbox label span {{
         color: var(--text-primary) !important;
-    }
+    }}
 
     /* ── Spinner ── */
-    .stSpinner > div {
+    .stSpinner > div {{
         border-top-color: var(--accent-primary) !important;
-    }
+    }}
 
     /* ──────────────────────────────────────── */
     /* ──         SIDEBAR STYLING             ── */
     /* ──────────────────────────────────────── */
-    [data-testid="stSidebarNav"] {
+    [data-testid="stSidebarNav"] {{
         display: none !important;
-    }
-    [data-testid="stSidebar"] {
-        background: linear-gradient(180deg, #070b14 0%, #0a1020 50%, #060910 100%) !important;
+    }}
+    [data-testid="stSidebar"] {{
+        background: var(--bg-sidebar) !important;
         border-right: 1px solid var(--border-subtle) !important;
-    }
-    [data-testid="stSidebar"]::before {
+    }}
+    [data-testid="stSidebar"]::before {{
         content: '';
         position: absolute;
         top: 0; left: 0; right: 0; bottom: 0;
         background:
             radial-gradient(ellipse at 50% 0%, rgba(0, 212, 255, 0.04) 0%, transparent 60%);
         pointer-events: none;
-    }
-    [data-testid="stSidebar"] * {
-        color: var(--text-secondary) !important;
-    }
+    }}
+    [data-testid="stSidebar"] * {{
+        color: var(--text-sidebar) !important;
+    }}
 
     /* Sidebar Title */
-    .sidebar-title {
+    .sidebar-title {{
         font-family: var(--font-heading) !important;
         font-size: 2rem;
         font-weight: 700;
@@ -444,8 +513,8 @@ st.markdown("""
         margin-bottom: 0;
         letter-spacing: -0.03em;
         line-height: 1.2;
-    }
-    .sidebar-subtitle {
+    }}
+    .sidebar-subtitle {{
         font-family: var(--font-body);
         font-size: 0.82rem;
         color: var(--text-muted) !important;
@@ -453,39 +522,40 @@ st.markdown("""
         font-weight: 400;
         letter-spacing: 0.03em;
         text-transform: uppercase;
-    }
+    }}
 
     /* Nav Radio in Sidebar */
-    [data-testid="stSidebar"] .stRadio > div {
-        background: rgba(0, 212, 255, 0.03) !important;
+    [data-testid="stSidebar"] .stRadio > div {{
+        background: var(--accent-glow) !important;
         border-radius: var(--radius-md) !important;
         padding: 8px !important;
         border: 1px solid var(--border-subtle) !important;
-    }
-    [data-testid="stSidebar"] .stRadio > div > label {
+    }}
+    [data-testid="stSidebar"] .stRadio > div > label {{
         padding: 0.6rem 1rem !important;
         border-radius: var(--radius-sm) !important;
         transition: var(--transition) !important;
         cursor: pointer !important;
-    }
-    [data-testid="stSidebar"] .stRadio > div > label:hover {
-        background: rgba(0, 212, 255, 0.08) !important;
-    }
+    }}
+    [data-testid="stSidebar"] .stRadio > div > label:hover {{
+        background: var(--accent-glow) !important;
+        opacity: 0.8;
+    }}
     [data-testid="stSidebar"] .stRadio > div > label[data-checked="true"],
-    [data-testid="stSidebar"] .stRadio > div > label:has(input:checked) {
-        background: rgba(0, 212, 255, 0.12) !important;
+    [data-testid="stSidebar"] .stRadio > div > label:has(input:checked) {{
+        background: var(--accent-glow-strong) !important;
         border-left: 3px solid var(--accent-primary) !important;
-    }
-    [data-testid="stSidebar"] .stRadio > div > label:has(input:checked) span {
+    }}
+    [data-testid="stSidebar"] .stRadio > div > label:has(input:checked) span {{
         color: var(--accent-primary) !important;
         font-weight: 600 !important;
-    }
+    }}
 
     /* Sidebar Badge */
-    .sidebar-badge {
-        background: rgba(0, 212, 255, 0.05);
+    .sidebar-badge {{
+        background: var(--accent-glow);
         color: var(--accent-primary) !important;
-        border: 1px solid rgba(0, 212, 255, 0.15);
+        border: 1px solid var(--border-accent);
         padding: 12px 16px;
         border-radius: var(--radius-md);
         font-size: 0.78rem;
@@ -495,22 +565,139 @@ st.markdown("""
         font-family: var(--font-heading);
         letter-spacing: 0.02em;
         animation: borderGlow 3s ease-in-out infinite;
-    }
+    }}
 
     /* ── Hide Streamlit branding ── */
-    #MainMenu { visibility: hidden; }
-    footer { visibility: hidden; }
-    header[data-testid="stHeader"] {
+    #MainMenu {{ visibility: hidden; }}
+    footer {{ visibility: hidden; }}
+    header[data-testid="stHeader"] {{
         background: transparent !important;
-    }
+    }}
 
     /* ── Plotly Charts Dark Theme ── */
-    .js-plotly-plot .plotly .modebar {
+    .js-plotly-plot .plotly .modebar {{
         background: transparent !important;
-    }
-    .js-plotly-plot .plotly .modebar-btn path {
+    }}
+    .js-plotly-plot .plotly .modebar-btn path {{
         fill: var(--text-muted) !important;
-    }
+    }}
+
+    /* ── Floating Theme Toggle Styling ── */
+    div[data-testid="element-container"]:has(.theme-toggle-trigger) + div[data-testid="element-container"] {{
+        position: fixed;
+        top: 15px;
+        right: 80px;
+        z-index: 999999;
+        background: var(--bg-card) !important;
+        border: 1px solid var(--border-accent) !important;
+        padding: 4px 16px !important;
+        border-radius: 30px !important;
+        box-shadow: var(--shadow-md) !important;
+        backdrop-filter: blur(10px) !important;
+        transition: var(--transition) !important;
+    }}
+    div[data-testid="element-container"]:has(.theme-toggle-trigger) + div[data-testid="element-container"]:hover {{
+        box-shadow: var(--shadow-glow) !important;
+        border-color: var(--accent-primary) !important;
+    }}
+    div[data-testid="element-container"]:has(.theme-toggle-trigger) + div[data-testid="element-container"] label {{
+        margin: 0 !important;
+        padding: 0 !important;
+    }}
+    div[data-testid="element-container"]:has(.theme-toggle-trigger) + div[data-testid="element-container"] p {{
+        font-size: 0.85rem !important;
+        font-weight: 600 !important;
+        color: var(--text-primary) !important;
+        font-family: var(--font-heading) !important;
+    }}
+
+    /* ── Subpage Hero & Card Overrides for high specificity ── */
+    .stApp .intel-hero,
+    .stApp .bench-hero,
+    .stApp .guard-hero,
+    .stApp .policy-hero {{
+        background: var(--bg-hero) !important;
+        border-color: var(--border-subtle) !important;
+    }}
+    .stApp .intel-hero h1,
+    .stApp .bench-hero h1,
+    .stApp .guard-hero h1,
+    .stApp .policy-hero h1 {{
+        color: var(--accent-primary) !important;
+    }}
+    .stApp .intel-hero p,
+    .stApp .bench-hero p,
+    .stApp .guard-hero p,
+    .stApp .policy-hero p {{
+        color: var(--text-secondary) !important;
+    }}
+
+    /* Subpage general cards and containers */
+    .stApp .alert-card,
+    .stApp .threat-card {{
+        background: var(--bg-card) !important;
+        border-color: var(--border-subtle) !important;
+    }}
+    .stApp .alert-card:hover,
+    .stApp .threat-card:hover {{
+        border-color: var(--accent-primary) !important;
+        box-shadow: var(--shadow-glow) !important;
+    }}
+    .stApp .alert-card h4,
+    .stApp .threat-card h4 {{
+        color: var(--text-primary) !important;
+    }}
+
+    /* Subpage layout containers (e.g. Columns that act as cards) */
+    .stApp div[data-testid="column"]:has(.section-card-trigger),
+    .stApp div[data-testid="column"]:has(.judge-card-trigger),
+    .stApp div[data-testid="column"]:has(.brief-panel-trigger),
+    .stApp div[data-testid="column"]:has(.panel-card-control-trigger),
+    .stApp div[data-testid="column"]:has(.panel-card-preview-trigger),
+    .stApp div[data-testid="column"]:has(.panel-card-monitor-trigger),
+    .stApp div[data-testid="column"]:has(.comparison-panel-trigger) {{
+        background: var(--bg-card) !important;
+        border-color: var(--border-subtle) !important;
+        box-shadow: var(--shadow-sm) !important;
+    }}
+    
+    .stApp div[data-testid="element-container"]:has(.controls-card-trigger) + div[data-testid="element-container"] > div[data-testid="stHorizontalBlock"],
+    .stApp div[data-testid="element-container"]:has(.chart-container-trigger) + div[data-testid="element-container"],
+    .stApp div[data-testid="element-container"]:has(.comparison-card-trigger) + div[data-testid="element-container"] > div[data-testid="stHorizontalBlock"],
+    .stApp div[data-testid="element-container"]:has(.selector-card-trigger) + div[data-testid="element-container"] > div[data-testid="stHorizontalBlock"],
+    .stApp div[data-testid="element-container"]:has(.report-card-trigger) + div[data-testid="element-container"] > div[data-testid="stHorizontalBlock"],
+    .stApp div[data-testid="element-container"]:has(.pareto-container-trigger) + div[data-testid="element-container"],
+    .stApp div[data-testid="element-container"]:has(.remediation-checklist-trigger) ~ div[data-testid="element-container"]:has(.stCheckbox) {{
+        background: var(--bg-card) !important;
+        border-color: var(--border-subtle) !important;
+    }}
+
+    .stApp div[data-testid="element-container"]:has(.slide-viewport-trigger) + div[data-testid="element-container"] {{
+        background: var(--bg-secondary) !important;
+        border-color: var(--border-accent) !important;
+    }}
+
+    /* ── Subpage Inline Element Text Overrides ── */
+    .stApp *[style*="color: #e6edf3"],
+    .stApp *[style*="color:#e6edf3"],
+    .stApp *[style*="color: rgb(230, 237, 243)"] {{
+        color: var(--text-primary) !important;
+    }}
+    .stApp *[style*="color: #8b9dc3"],
+    .stApp *[style*="color:#8b9dc3"],
+    .stApp *[style*="color: rgb(139, 157, 195)"] {{
+        color: var(--text-secondary) !important;
+    }}
+    .stApp *[style*="color: #00d4ff"],
+    .stApp *[style*="color:#00d4ff"],
+    .stApp *[style*="color: rgb(0, 212, 255)"] {{
+        color: var(--accent-primary) !important;
+    }}
+    .stApp *[style*="color: #4a5578"],
+    .stApp *[style*="color:#4a5578"],
+    .stApp *[style*="color: rgb(74, 85, 120)"] {{
+        color: var(--text-muted) !important;
+    }}
 
 </style>
 """, unsafe_allow_html=True)
@@ -725,7 +912,18 @@ with st.sidebar:
     page = st.radio(
         "Navigation",
         options=["🚨 IntelStream", "📊 SafetyBench", "🛡️ AgentGuard", "⚖️ PolicyBridge"],
-        label_visibility="collapsed"
+        label_visibility="collapsed",
+        key="navigation_page"
+    )
+
+    # Spacer to push toggle to the bottom
+    st.markdown('<div style="height: 120px;"></div>', unsafe_allow_html=True)
+
+    # Theme Toggle inside Sidebar (Toggle ON = Light Mode, Toggle OFF = Dark Mode)
+    st.toggle(
+        label="☀️ Light Mode",
+        value=not st.session_state["dark_mode"],
+        key="theme_toggle"
     )
 
     # Bottom Badge

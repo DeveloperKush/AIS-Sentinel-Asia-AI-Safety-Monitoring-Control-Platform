@@ -242,7 +242,7 @@ AIS-Sentinel/
 │   └── reporter.py                       # Compliance reports (HTML + Markdown)
 │
 ├── 🌐 frontend/                          # Streamlit dashboard
-│   ├── app.py                            # Main entry point & multi-page router
+│   ├── app.py                            # Main entry point, router & global theme engine
 │   └── pages/                            # Dashboard pages
 │       ├── 01_intelstream.py             # Alert ticker + article feed + judge simulation
 │       ├── 02_safetybench.py             # Radar charts + leaderboard + SDI display
@@ -280,7 +280,7 @@ AIS-Sentinel/
 |:---|:---|:---|
 | Python | 3.11+ | Runtime |
 | Gemini API Key | — | LLM backbone ([Get one free](https://aistudio.google.com/app/apikey)) |
-| vLLM | Latest | Model serving for SafetyBench *(optional)* |
+| vLLM | Latest | Local model serving for SafetyBench *(optional — not needed for Streamlit Cloud)* |
 
 ### Installation
 
@@ -433,6 +433,7 @@ SDI = Sycophancy Rate (Non-English) / Sycophancy Rate (English)
 - **Comparison Bar Charts** — Side-by-side model performance
 - **Heatmaps** — Language × category failure rates
 - **Sortable Leaderboard** — Ranked by composite safety score
+- All charts adapt automatically to **Light / Dark mode**
 
 </details>
 
@@ -599,8 +600,9 @@ These findings carry **immediate regulatory significance:**
 | Layer | Technology | Purpose |
 |:---|:---|:---|
 | **LLM Backbone** | Google Gemini 2.5 Flash | Text generation, structured output, translation |
-| **Model Serving** | vLLM | Serving open-weight models for benchmarking |
+| **Model Serving** | vLLM *(optional)* | Serving open-weight models for benchmarking |
 | **Frontend** | Streamlit + Plotly | Interactive dashboards & visualizations |
+| **Theming** | CSS Custom Properties | Light / Dark mode with sidebar toggle |
 | **Database** | SQLite | Persistent storage across all modules |
 | **Templating** | Jinja2 | HTML intelligence brief generation |
 | **Scraping** | feedparser + newspaper3k | RSS feeds & article extraction |
@@ -646,6 +648,8 @@ python tests/validate_classifier.py # Requires GEMINI_API_KEY
 | Slide-only AgentGuard | Code-execution & web-browsing agent modalities |
 | SQLite database | PostgreSQL with connection pooling for production |
 | No real-time alerting | Integration with national CERT teams for live routing |
+
+> **Deployment note:** The platform runs fully on [Streamlit Cloud](https://ais-sentinel.streamlit.app) without vLLM. SafetyBench uses pre-seeded demo data in cloud mode; vLLM is only needed for local live-model benchmarking.
 
 ---
 

@@ -288,31 +288,38 @@ with col_main:
                     line=dict(color=model_colors.get(model, "#00d4ff"))
                 ))
                 
+        is_dark = st.session_state.get("dark_mode", True)
+        chart_text_color = "#8b9dc3" if is_dark else "#2d3748"
+        chart_title_color = "#e6edf3" if is_dark else "#1a202c"
+        chart_grid_color = "rgba(0, 212, 255, 0.06)" if is_dark else "rgba(0, 102, 204, 0.12)"
+        chart_axis_color = "#4a5578" if is_dark else "#5a6578"
+        chart_radar_bg = "rgba(6, 9, 16, 0.3)" if is_dark else "rgba(244, 246, 250, 0.5)"
+
         radar_fig.update_layout(
             polar=dict(
                 radialaxis=dict(
                     visible=True,
                     range=[0, 100],
-                    color="#4a5578",
-                    gridcolor="rgba(0, 212, 255, 0.06)"
+                    color=chart_axis_color,
+                    gridcolor=chart_grid_color
                 ),
                 angularaxis=dict(
-                    color="#8b9dc3",
-                    gridcolor="rgba(0, 212, 255, 0.06)"
+                    color=chart_text_color,
+                    gridcolor=chart_grid_color
                 ),
-                bgcolor="rgba(6, 9, 16, 0.3)"
+                bgcolor=chart_radar_bg
             ),
             paper_bgcolor="rgba(0,0,0,0)",
             plot_bgcolor="rgba(0,0,0,0)",
-            font=dict(color="#8b9dc3", family="Inter, sans-serif"),
+            font=dict(color=chart_text_color, family="Inter, sans-serif"),
             title=dict(
                 text=f"Safety Profile Benchmarks ({radar_lang})",
                 x=0.5,
-                font=dict(size=16, color="#e6edf3")
+                font=dict(size=16, color=chart_title_color)
             ),
             legend=dict(
                 orientation="h", yanchor="bottom", y=-0.2, xanchor="center", x=0.5,
-                font=dict(color="#8b9dc3")
+                font=dict(color=chart_text_color)
             ),
             margin=dict(t=60, b=60)
         )
@@ -413,6 +420,12 @@ if model_a and model_b:
         "Model": [model_a] * 4 + [model_b] * 4
     })
     
+    is_dark = st.session_state.get("dark_mode", True)
+    chart_text_color = "#8b9dc3" if is_dark else "#2d3748"
+    chart_grid_color = "rgba(0, 212, 255, 0.06)" if is_dark else "rgba(0, 102, 204, 0.12)"
+    color_a = "#00d4ff" if is_dark else "#0066cc"
+    color_b = "#a78bfa" if is_dark else "#6d28d9"
+
     # Render grouped bar chart comparing the two selected models
     bar_fig = px.bar(
         comp_df,
@@ -421,8 +434,8 @@ if model_a and model_b:
         color="Model",
         barmode="group",
         color_discrete_map={
-            model_a: "#00d4ff",
-            model_b: "#a78bfa"
+            model_a: color_a,
+            model_b: color_b
         },
         labels={"Score": "Score (0.0 - 1.0)"}
     )
@@ -430,10 +443,10 @@ if model_a and model_b:
     bar_fig.update_layout(
         paper_bgcolor="rgba(0,0,0,0)",
         plot_bgcolor="rgba(0,0,0,0)",
-        font=dict(color="#8b9dc3", family="Inter, sans-serif"),
-        xaxis=dict(gridcolor="rgba(0, 212, 255, 0.06)", color="#8b9dc3"),
-        yaxis=dict(gridcolor="rgba(0, 212, 255, 0.06)", range=[0, 1.0], color="#8b9dc3"),
-        legend=dict(font=dict(color="#8b9dc3")),
+        font=dict(color=chart_text_color, family="Inter, sans-serif"),
+        xaxis=dict(gridcolor=chart_grid_color, color=chart_text_color),
+        yaxis=dict(gridcolor=chart_grid_color, range=[0, 1.0], color=chart_text_color),
+        legend=dict(font=dict(color=chart_text_color)),
         margin=dict(t=30, b=30)
     )
     

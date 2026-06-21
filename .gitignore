@@ -44,3 +44,9 @@ Thumbs.db
 /test_snippet.py
 /test_sentinel_temp.db
 /AIS-Sentinel_PRD_v2.pdf
+
+# Dev scratch files
+context.txt
+
+# Logs
+*.log

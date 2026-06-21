@@ -341,17 +341,24 @@ with col3:
         """, unsafe_allow_html=True)
         
         # Gauge Chart using Plotly
+        is_dark = st.session_state.get("dark_mode", True)
+        chart_text_color = "#8b9dc3" if is_dark else "#2d3748"
+        chart_title_color = "#e6edf3" if is_dark else "#1a202c"
+        gauge_bg = "rgba(14, 21, 38, 0.5)" if is_dark else "rgba(244, 246, 250, 0.8)"
+        gauge_border = "rgba(0, 212, 255, 0.1)" if is_dark else "rgba(0, 102, 204, 0.15)"
+        tick_color = '#4a5578' if is_dark else '#5a6578'
+
         gauge_chart = go.Figure(go.Indicator(
             mode = "gauge+number",
             value = current_score,
             domain = {'x': [0, 1], 'y': [0, 1]},
-            title = {'text': "Monitor Score", 'font': {'color': '#8b9dc3', 'size': 14}},
-            number = {'font': {'color': '#e6edf3', 'size': 36}},
+            title = {'text': "Monitor Score", 'font': {'color': chart_text_color, 'size': 14}},
+            number = {'font': {'color': chart_title_color, 'size': 36}},
             gauge = {
-                'axis': {'range': [0, 100], 'tickcolor': '#4a5578', 'dtick': 25},
+                'axis': {'range': [0, 100], 'tickcolor': tick_color, 'dtick': 25},
                 'bar': {'color': "#ff4d6d" if current_score > 70 else "#00d9a3"},
-                'bgcolor': 'rgba(14, 21, 38, 0.5)',
-                'bordercolor': 'rgba(0, 212, 255, 0.1)',
+                'bgcolor': gauge_bg,
+                'bordercolor': gauge_border,
                 'steps': [
                     {'range': [0, 50], 'color': "rgba(0, 217, 163, 0.1)"},
                     {'range': [50, 70], 'color': "rgba(255, 159, 67, 0.1)"},
@@ -369,7 +376,7 @@ with col3:
             margin=dict(l=20, r=20, t=30, b=10),
             paper_bgcolor="rgba(0,0,0,0)",
             plot_bgcolor="rgba(0,0,0,0)",
-            font=dict(color="#8b9dc3")
+            font=dict(color=chart_text_color)
         )
         st.plotly_chart(gauge_chart, use_container_width=True)
         
@@ -469,10 +476,16 @@ fig = px.line(
     title="Detection Rate vs False Positive Rate (Tradeoff)"
 )
 
+is_dark = st.session_state.get("dark_mode", True)
+chart_text_color = "#8b9dc3" if is_dark else "#2d3748"
+chart_title_color = "#e6edf3" if is_dark else "#1a202c"
+chart_grid_color = "rgba(0, 212, 255, 0.06)" if is_dark else "rgba(0, 102, 204, 0.12)"
+line_color = "#00d4ff" if is_dark else "#0066cc"
+
 fig.update_traces(
     textposition="top right",
-    line=dict(color="#00d4ff", width=2),
-    marker=dict(size=8, color="#00d4ff")
+    line=dict(color=line_color, width=2),
+    marker=dict(size=8, color=line_color)
 )
 fig.add_scatter(
     x=[0.05], y=[0.88], mode='markers',
@@ -483,11 +496,11 @@ fig.add_scatter(
 fig.update_layout(
     paper_bgcolor="rgba(0,0,0,0)",
     plot_bgcolor="rgba(0,0,0,0)",
-    font=dict(color="#8b9dc3", family="Inter, sans-serif"),
-    xaxis=dict(gridcolor="rgba(0, 212, 255, 0.06)", color="#8b9dc3"),
-    yaxis=dict(gridcolor="rgba(0, 212, 255, 0.06)", color="#8b9dc3"),
-    title=dict(font=dict(color="#e6edf3", size=14)),
-    legend=dict(font=dict(color="#8b9dc3")),
+    font=dict(color=chart_text_color, family="Inter, sans-serif"),
+    xaxis=dict(gridcolor=chart_grid_color, color=chart_text_color),
+    yaxis=dict(gridcolor=chart_grid_color, color=chart_text_color),
+    title=dict(font=dict(color=chart_title_color, size=14)),
+    legend=dict(font=dict(color=chart_text_color)),
     margin=dict(t=50, b=30)
 )
 
